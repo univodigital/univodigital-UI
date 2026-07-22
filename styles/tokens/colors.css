@@ -1,0 +1,117 @@
+/**
+ * Univo Digital — Color tokens
+ * Semantic tokens only. Do not use raw hex/oklch in components.
+ */
+
+:root {
+  /* Brand / semantic */
+  --uds-color-primary: oklch(0.22 0.02 250);
+  --uds-color-primary-foreground: oklch(0.99 0 0);
+  --uds-color-secondary: oklch(0.96 0.005 250);
+  --uds-color-secondary-foreground: oklch(0.22 0.02 250);
+  --uds-color-accent: oklch(0.55 0.12 195);
+  --uds-color-accent-foreground: oklch(0.99 0 0);
+
+  /* Surfaces */
+  --uds-color-background: oklch(1 0 0);
+  --uds-color-surface: oklch(0.985 0.002 250);
+  --uds-color-surface-elevated: oklch(1 0 0);
+  --uds-color-muted: oklch(0.96 0.005 250);
+  --uds-color-muted-foreground: oklch(0.5 0.01 250);
+
+  /* Text */
+  --uds-color-text-primary: oklch(0.18 0.015 250);
+  --uds-color-text-secondary: oklch(0.45 0.01 250);
+  --uds-color-text-inverse: oklch(0.99 0 0);
+
+  /* Borders & focus */
+  --uds-color-border: oklch(0.9 0.005 250);
+  --uds-color-border-strong: oklch(0.82 0.01 250);
+  --uds-color-ring: oklch(0.55 0.12 195);
+  --uds-color-input: oklch(0.9 0.005 250);
+
+  /* Feedback */
+  --uds-color-success: oklch(0.55 0.14 150);
+  --uds-color-success-foreground: oklch(0.99 0 0);
+  --uds-color-warning: oklch(0.75 0.14 75);
+  --uds-color-warning-foreground: oklch(0.25 0.04 75);
+  --uds-color-danger: oklch(0.55 0.2 25);
+  --uds-color-danger-foreground: oklch(0.99 0 0);
+
+  /* Aliases for shadcn / Tailwind bridge */
+  --background: var(--uds-color-background);
+  --foreground: var(--uds-color-text-primary);
+  --surface: var(--uds-color-surface);
+  --text-primary: var(--uds-color-text-primary);
+  --text-secondary: var(--uds-color-text-secondary);
+  --card: var(--uds-color-surface-elevated);
+  --card-foreground: var(--uds-color-text-primary);
+  --popover: var(--uds-color-surface-elevated);
+  --popover-foreground: var(--uds-color-text-primary);
+  --primary: var(--uds-color-primary);
+  --primary-foreground: var(--uds-color-primary-foreground);
+  --secondary: var(--uds-color-secondary);
+  --secondary-foreground: var(--uds-color-secondary-foreground);
+  --muted: var(--uds-color-muted);
+  --muted-foreground: var(--uds-color-muted-foreground);
+  --accent: var(--uds-color-accent);
+  --accent-foreground: var(--uds-color-accent-foreground);
+  --destructive: var(--uds-color-danger);
+  --border: var(--uds-color-border);
+  --input: var(--uds-color-input);
+  --ring: var(--uds-color-ring);
+  --success: var(--uds-color-success);
+  --warning: var(--uds-color-warning);
+  --danger: var(--uds-color-danger);
+  --chart-1: oklch(0.55 0.12 195);
+  --chart-2: oklch(0.45 0.02 250);
+  --chart-3: oklch(0.65 0.08 195);
+  --chart-4: oklch(0.35 0.02 250);
+  --chart-5: oklch(0.75 0.06 195);
+  --sidebar: var(--uds-color-surface);
+  --sidebar-foreground: var(--uds-color-text-primary);
+  --sidebar-primary: var(--uds-color-primary);
+  --sidebar-primary-foreground: var(--uds-color-primary-foreground);
+  --sidebar-accent: var(--uds-color-secondary);
+  --sidebar-accent-foreground: var(--uds-color-secondary-foreground);
+  --sidebar-border: var(--uds-color-border);
+  --sidebar-ring: var(--uds-color-ring);
+}
+
+.dark {
+  --uds-color-primary: oklch(0.92 0.01 250);
+  --uds-color-primary-foreground: oklch(0.2 0.02 250);
+  --uds-color-secondary: oklch(0.26 0.015 250);
+  --uds-color-secondary-foreground: oklch(0.95 0.005 250);
+  --uds-color-accent: oklch(0.7 0.12 195);
+  --uds-color-accent-foreground: oklch(0.15 0.02 195);
+
+  --uds-color-background: oklch(0.16 0.015 250);
+  --uds-color-surface: oklch(0.2 0.015 250);
+  --uds-color-surface-elevated: oklch(0.24 0.015 250);
+  --uds-color-muted: oklch(0.26 0.015 250);
+  --uds-color-muted-foreground: oklch(0.7 0.01 250);
+
+  --uds-color-text-primary: oklch(0.97 0.005 250);
+  --uds-color-text-secondary: oklch(0.7 0.01 250);
+  --uds-color-text-inverse: oklch(0.18 0.015 250);
+
+  --uds-color-border: oklch(1 0 0 / 12%);
+  --uds-color-border-strong: oklch(1 0 0 / 20%);
+  --uds-color-ring: oklch(0.7 0.12 195);
+  --uds-color-input: oklch(1 0 0 / 15%);
+
+  --uds-color-success: oklch(0.65 0.14 150);
+  --uds-color-success-foreground: oklch(0.15 0.03 150);
+  --uds-color-warning: oklch(0.8 0.14 75);
+  --uds-color-warning-foreground: oklch(0.25 0.04 75);
+  --uds-color-danger: oklch(0.68 0.18 25);
+  --uds-color-danger-foreground: oklch(0.99 0 0);
+
+  --chart-1: oklch(0.7 0.12 195);
+  --chart-2: oklch(0.7 0.01 250);
+  --chart-3: oklch(0.6 0.08 195);
+  --chart-4: oklch(0.5 0.02 250);
+  --chart-5: oklch(0.8 0.06 195);
+  --sidebar-primary: oklch(0.65 0.12 195);
+}

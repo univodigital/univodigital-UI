@@ -1,0 +1,38 @@
+/**
+ * Univo Digital — Layout tokens
+ * Containers: max 1280 / content 1200
+ * Grid: 12 columns
+ * Breakpoints: 480 / 768 / 1024 / 1200
+ */
+
+:root {
+  /* Containers */
+  --uds-container-max: 80rem; /* 1280 */
+  --uds-container-content: 75rem; /* 1200 */
+  --uds-container-narrow: 48rem; /* 768 */
+  --uds-container-wide: 90rem; /* 1440 */
+
+  /* Grid */
+  --uds-grid-columns: 12;
+  --uds-grid-gutter: var(--uds-space-6);
+  --uds-grid-gutter-sm: var(--uds-space-4);
+  --uds-grid-gutter-lg: var(--uds-space-8);
+  --uds-grid-margin: var(--uds-space-4);
+  --uds-grid-margin-lg: var(--uds-space-8);
+
+  /* Breakpoints (reference values; Tailwind uses @theme) */
+  --uds-breakpoint-mobile: 30rem; /* 480 */
+  --uds-breakpoint-tablet: 48rem; /* 768 */
+  --uds-breakpoint-laptop: 64rem; /* 1024 */
+  --uds-breakpoint-desktop: 75rem; /* 1200 */
+  --uds-breakpoint-max: 80rem; /* 1280 */
+
+  /* Z-index scale */
+  --uds-z-base: 0;
+  --uds-z-dropdown: 50;
+  --uds-z-sticky: 100;
+  --uds-z-overlay: 200;
+  --uds-z-modal: 300;
+  --uds-z-toast: 400;
+  --uds-z-tooltip: 500;
+}

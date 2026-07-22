@@ -1,0 +1,33 @@
+/**
+ * Univo Digital — Shadow tokens
+ * Soft elevation; stronger on card hover lift.
+ */
+
+:root {
+  --uds-shadow-none: none;
+  --uds-shadow-xs: 0 1px 2px oklch(0.2 0.02 250 / 4%);
+  --uds-shadow-sm: 0 1px 3px oklch(0.2 0.02 250 / 6%),
+    0 1px 2px oklch(0.2 0.02 250 / 4%);
+  --uds-shadow-md: 0 4px 12px oklch(0.2 0.02 250 / 8%),
+    0 2px 4px oklch(0.2 0.02 250 / 4%);
+  --uds-shadow-lg: 0 12px 32px oklch(0.2 0.02 250 / 10%),
+    0 4px 8px oklch(0.2 0.02 250 / 5%);
+  --uds-shadow-xl: 0 24px 48px oklch(0.2 0.02 250 / 12%),
+    0 8px 16px oklch(0.2 0.02 250 / 6%);
+
+  /* Semantic */
+  --uds-shadow-card: var(--uds-shadow-sm);
+  --uds-shadow-card-hover: var(--uds-shadow-lg);
+  --uds-shadow-dropdown: var(--uds-shadow-md);
+  --uds-shadow-modal: var(--uds-shadow-xl);
+  --uds-shadow-focus: 0 0 0 3px oklch(0.55 0.12 195 / 30%);
+}
+
+.dark {
+  --uds-shadow-xs: 0 1px 2px oklch(0 0 0 / 30%);
+  --uds-shadow-sm: 0 1px 3px oklch(0 0 0 / 40%), 0 1px 2px oklch(0 0 0 / 25%);
+  --uds-shadow-md: 0 4px 12px oklch(0 0 0 / 45%), 0 2px 4px oklch(0 0 0 / 30%);
+  --uds-shadow-lg: 0 12px 32px oklch(0 0 0 / 50%), 0 4px 8px oklch(0 0 0 / 35%);
+  --uds-shadow-xl: 0 24px 48px oklch(0 0 0 / 55%), 0 8px 16px oklch(0 0 0 / 40%);
+  --uds-shadow-focus: 0 0 0 3px oklch(0.7 0.12 195 / 35%);
+}

@@ -1,0 +1,25 @@
+/**
+ * Univo Digital — Radius tokens
+ * Images and cards use rounded corners per design system.
+ */
+
+:root {
+  --uds-radius-none: 0;
+  --uds-radius-sm: 0.25rem; /* 4 */
+  --uds-radius-md: 0.5rem; /* 8 */
+  --uds-radius-lg: 0.75rem; /* 12 */
+  --uds-radius-xl: 1rem; /* 16 */
+  --uds-radius-2xl: 1.25rem; /* 20 */
+  --uds-radius-3xl: 1.5rem; /* 24 */
+  --uds-radius-full: 9999px;
+
+  /* Semantic */
+  --uds-radius-button: var(--uds-radius-md);
+  --uds-radius-card: var(--uds-radius-xl);
+  --uds-radius-image: var(--uds-radius-xl);
+  --uds-radius-input: var(--uds-radius-md);
+  --uds-radius-badge: var(--uds-radius-full);
+
+  /* shadcn bridge */
+  --radius: 0.625rem;
+}

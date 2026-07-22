@@ -1,0 +1,52 @@
+/**
+ * Univo Digital — Motion / animation tokens
+ * Fast 150ms | Normal 250ms | Slow 500ms
+ * Respect prefers-reduced-motion.
+ */
+
+:root {
+  /* Durations (ms for CSS, seconds mirrored in TS) */
+  --uds-duration-instant: 0ms;
+  --uds-duration-fast: 150ms;
+  --uds-duration-normal: 250ms;
+  --uds-duration-slow: 500ms;
+  --uds-duration-slower: 700ms;
+
+  /* Easings */
+  --uds-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --uds-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --uds-ease-entrance: cubic-bezier(0, 0, 0.2, 1);
+  --uds-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --uds-ease-linear: linear;
+
+  /* Motion distances */
+  --uds-motion-fade-distance: 1.5rem;
+  --uds-motion-lift: -0.25rem;
+  --uds-motion-scale-hover: 1.02;
+  --uds-motion-zoom: 1.05;
+  --uds-motion-stagger: 80ms;
+
+  /* Transition shorthand tokens */
+  --uds-transition-colors: color var(--uds-duration-normal) var(--uds-ease-standard),
+    background-color var(--uds-duration-normal) var(--uds-ease-standard),
+    border-color var(--uds-duration-normal) var(--uds-ease-standard);
+  --uds-transition-transform: transform var(--uds-duration-normal)
+    var(--uds-ease-standard);
+  --uds-transition-shadow: box-shadow var(--uds-duration-normal)
+    var(--uds-ease-standard);
+  --uds-transition-all: all var(--uds-duration-normal) var(--uds-ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --uds-duration-fast: 0ms;
+    --uds-duration-normal: 0ms;
+    --uds-duration-slow: 0ms;
+    --uds-duration-slower: 0ms;
+    --uds-motion-fade-distance: 0;
+    --uds-motion-lift: 0;
+    --uds-motion-scale-hover: 1;
+    --uds-motion-zoom: 1;
+    --uds-motion-stagger: 0ms;
+  }
+}

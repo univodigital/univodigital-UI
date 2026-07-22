@@ -1,0 +1,173 @@
+/**
+ * Univo Digital — Tailwind theme bridge
+ * Maps UDS CSS variables into Tailwind utilities.
+ */
+
+@theme inline {
+  /* Fonts */
+  --font-sans: var(--uds-font-body);
+  --font-heading: var(--uds-font-heading);
+  --font-mono: var(--uds-font-mono);
+
+  /* Colors — semantic (design system) */
+  --color-background: var(--uds-color-background);
+  --color-foreground: var(--uds-color-text-primary);
+  --color-surface: var(--uds-color-surface);
+  --color-surface-elevated: var(--uds-color-surface-elevated);
+  --color-text-primary: var(--uds-color-text-primary);
+  --color-text-secondary: var(--uds-color-text-secondary);
+  --color-text-inverse: var(--uds-color-text-inverse);
+  --color-border: var(--uds-color-border);
+  --color-border-strong: var(--uds-color-border-strong);
+  --color-success: var(--uds-color-success);
+  --color-success-foreground: var(--uds-color-success-foreground);
+  --color-warning: var(--uds-color-warning);
+  --color-warning-foreground: var(--uds-color-warning-foreground);
+  --color-danger: var(--uds-color-danger);
+  --color-danger-foreground: var(--uds-color-danger-foreground);
+
+  /* Colors — shadcn compatibility */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography scale → text-* utilities */
+  --text-h1: var(--uds-text-h1);
+  --text-h1--line-height: var(--uds-leading-h1);
+  --text-h1--letter-spacing: var(--uds-tracking-h1);
+  --text-h1--font-weight: var(--uds-weight-bold);
+
+  --text-h2: var(--uds-text-h2);
+  --text-h2--line-height: var(--uds-leading-h2);
+  --text-h2--letter-spacing: var(--uds-tracking-h2);
+  --text-h2--font-weight: var(--uds-weight-bold);
+
+  --text-h3: var(--uds-text-h3);
+  --text-h3--line-height: var(--uds-leading-h3);
+  --text-h3--letter-spacing: var(--uds-tracking-h3);
+  --text-h3--font-weight: var(--uds-weight-semibold);
+
+  --text-h4: var(--uds-text-h4);
+  --text-h4--line-height: var(--uds-leading-h4);
+  --text-h4--letter-spacing: var(--uds-tracking-h4);
+  --text-h4--font-weight: var(--uds-weight-semibold);
+
+  --text-body-lg: var(--uds-text-body-lg);
+  --text-body-lg--line-height: var(--uds-leading-body);
+  --text-body-lg--font-weight: var(--uds-weight-regular);
+
+  --text-body: var(--uds-text-body);
+  --text-body--line-height: var(--uds-leading-body);
+  --text-body--font-weight: var(--uds-weight-regular);
+
+  --text-caption: var(--uds-text-caption);
+  --text-caption--line-height: var(--uds-leading-caption);
+  --text-caption--letter-spacing: var(--uds-tracking-caption);
+  --text-caption--font-weight: var(--uds-weight-regular);
+
+  --text-overline: var(--uds-text-overline);
+  --text-overline--line-height: var(--uds-leading-caption);
+  --text-overline--letter-spacing: var(--uds-tracking-overline);
+  --text-overline--font-weight: var(--uds-weight-medium);
+
+  /* Spacing (8pt) → p-*, gap-*, m-*, etc. via uds-* and aliases */
+  --spacing-uds-0: var(--uds-space-0);
+  --spacing-uds-0-5: var(--uds-space-0-5);
+  --spacing-uds-1: var(--uds-space-1);
+  --spacing-uds-2: var(--uds-space-2);
+  --spacing-uds-3: var(--uds-space-3);
+  --spacing-uds-4: var(--uds-space-4);
+  --spacing-uds-5: var(--uds-space-5);
+  --spacing-uds-6: var(--uds-space-6);
+  --spacing-uds-7: var(--uds-space-7);
+  --spacing-uds-8: var(--uds-space-8);
+  --spacing-uds-9: var(--uds-space-9);
+  --spacing-uds-10: var(--uds-space-10);
+  --spacing-uds-12: var(--uds-space-12);
+  --spacing-uds-14: var(--uds-space-14);
+  --spacing-uds-16: var(--uds-space-16);
+  --spacing-uds-20: var(--uds-space-20);
+  --spacing-uds-24: var(--uds-space-24);
+  --spacing-uds-28: var(--uds-space-28);
+  --spacing-uds-32: var(--uds-space-32);
+  --spacing-uds-40: var(--uds-space-40);
+  --spacing-uds-48: var(--uds-space-48);
+  --spacing-section: var(--uds-space-section);
+  --spacing-section-sm: var(--uds-space-section-sm);
+  --spacing-section-lg: var(--uds-space-section-lg);
+  --spacing-gutter: var(--uds-space-gutter);
+  --spacing-gutter-lg: var(--uds-space-gutter-lg);
+  --spacing-stack: var(--uds-space-stack);
+  --spacing-stack-lg: var(--uds-space-stack-lg);
+
+  /* Radius */
+  --radius-none: var(--uds-radius-none);
+  --radius-sm: var(--uds-radius-sm);
+  --radius-md: var(--uds-radius-md);
+  --radius-lg: var(--uds-radius-lg);
+  --radius-xl: var(--uds-radius-xl);
+  --radius-2xl: var(--uds-radius-2xl);
+  --radius-3xl: var(--uds-radius-3xl);
+  --radius-full: var(--uds-radius-full);
+  --radius-button: var(--uds-radius-button);
+  --radius-card: var(--uds-radius-card);
+  --radius-image: var(--uds-radius-image);
+  --radius-input: var(--uds-radius-input);
+  --radius-badge: var(--uds-radius-badge);
+
+  /* Shadows */
+  --shadow-xs: var(--uds-shadow-xs);
+  --shadow-sm: var(--uds-shadow-sm);
+  --shadow-md: var(--uds-shadow-md);
+  --shadow-lg: var(--uds-shadow-lg);
+  --shadow-xl: var(--uds-shadow-xl);
+  --shadow-card: var(--uds-shadow-card);
+  --shadow-card-hover: var(--uds-shadow-card-hover);
+  --shadow-dropdown: var(--uds-shadow-dropdown);
+  --shadow-modal: var(--uds-shadow-modal);
+  --shadow-focus: var(--uds-shadow-focus);
+
+  /* Containers */
+  --container-max: var(--uds-container-max);
+  --container-content: var(--uds-container-content);
+  --container-narrow: var(--uds-container-narrow);
+  --container-wide: var(--uds-container-wide);
+
+  /* Breakpoints: Mobile 480 | Tablet 768 | Laptop 1024 | Desktop 1200 */
+  --breakpoint-mobile: 30rem;
+  --breakpoint-sm: 30rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 75rem;
+  --breakpoint-2xl: 80rem;
+
+  /* Motion */
+  --animate-duration-fast: var(--uds-duration-fast);
+  --animate-duration-normal: var(--uds-duration-normal);
+  --animate-duration-slow: var(--uds-duration-slow);
+}

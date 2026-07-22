@@ -1,0 +1,37 @@
+/**
+ * Univo Digital — Spacing tokens (8pt system)
+ * Base unit: 8px. Half-steps (4px) allowed for fine tuning.
+ */
+
+:root {
+  --uds-space-0: 0;
+  --uds-space-0-5: 0.125rem; /* 2 */
+  --uds-space-1: 0.25rem; /* 4 */
+  --uds-space-2: 0.5rem; /* 8 */
+  --uds-space-3: 0.75rem; /* 12 */
+  --uds-space-4: 1rem; /* 16 */
+  --uds-space-5: 1.25rem; /* 20 */
+  --uds-space-6: 1.5rem; /* 24 */
+  --uds-space-7: 1.75rem; /* 28 */
+  --uds-space-8: 2rem; /* 32 */
+  --uds-space-9: 2.25rem; /* 36 */
+  --uds-space-10: 2.5rem; /* 40 */
+  --uds-space-12: 3rem; /* 48 */
+  --uds-space-14: 3.5rem; /* 56 */
+  --uds-space-16: 4rem; /* 64 */
+  --uds-space-20: 5rem; /* 80 */
+  --uds-space-24: 6rem; /* 96 */
+  --uds-space-28: 7rem; /* 112 */
+  --uds-space-32: 8rem; /* 128 */
+  --uds-space-40: 10rem; /* 160 */
+  --uds-space-48: 12rem; /* 192 */
+
+  /* Semantic spacing */
+  --uds-space-section: var(--uds-space-24);
+  --uds-space-section-sm: var(--uds-space-16);
+  --uds-space-section-lg: var(--uds-space-32);
+  --uds-space-gutter: var(--uds-space-6);
+  --uds-space-gutter-lg: var(--uds-space-8);
+  --uds-space-stack: var(--uds-space-4);
+  --uds-space-stack-lg: var(--uds-space-8);
+}

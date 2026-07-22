@@ -1,0 +1,75 @@
+/**
+ * Univo Digital — Layout utilities
+ * Container widths + 12-column grid system.
+ * Use Tailwind col-span-* for column spans inside .grid-system.
+ */
+
+@layer utilities {
+  .container-max {
+    width: 100%;
+    max-width: var(--uds-container-max);
+    margin-inline: auto;
+    padding-inline: var(--uds-grid-margin);
+  }
+
+  .container-content {
+    width: 100%;
+    max-width: var(--uds-container-content);
+    margin-inline: auto;
+    padding-inline: var(--uds-grid-margin);
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: var(--uds-container-narrow);
+    margin-inline: auto;
+    padding-inline: var(--uds-grid-margin);
+  }
+
+  .container-wide {
+    width: 100%;
+    max-width: var(--uds-container-wide);
+    margin-inline: auto;
+    padding-inline: var(--uds-grid-margin);
+  }
+
+  @media (min-width: 64rem) {
+    .container-max,
+    .container-content,
+    .container-narrow,
+    .container-wide {
+      padding-inline: var(--uds-grid-margin-lg);
+    }
+  }
+
+  /* 12-column grid — pair with col-span-* utilities */
+  .grid-system {
+    display: grid;
+    grid-template-columns: repeat(var(--uds-grid-columns), minmax(0, 1fr));
+    column-gap: var(--uds-grid-gutter);
+    row-gap: var(--uds-grid-gutter);
+  }
+
+  .grid-system-sm {
+    column-gap: var(--uds-grid-gutter-sm);
+    row-gap: var(--uds-grid-gutter-sm);
+  }
+
+  .grid-system-lg {
+    column-gap: var(--uds-grid-gutter-lg);
+    row-gap: var(--uds-grid-gutter-lg);
+  }
+
+  /* Section vertical rhythm */
+  .section-space {
+    padding-block: var(--uds-space-section);
+  }
+
+  .section-space-sm {
+    padding-block: var(--uds-space-section-sm);
+  }
+
+  .section-space-lg {
+    padding-block: var(--uds-space-section-lg);
+  }
+}

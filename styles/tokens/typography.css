@@ -1,0 +1,48 @@
+/**
+ * Univo Digital — Typography scale
+ * Headings: Inter (General Sans optional local override)
+ * Body: Inter
+ *
+ * H1 64–72 | H2 48 | H3 36 | H4 28 | Body 18/16 | Caption 14
+ */
+
+:root {
+  --uds-font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --uds-font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --uds-font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Font sizes */
+  --uds-text-h1: clamp(4rem, 3.5rem + 1.5vw, 4.5rem); /* 64–72 */
+  --uds-text-h2: 3rem; /* 48 */
+  --uds-text-h3: 2.25rem; /* 36 */
+  --uds-text-h4: 1.75rem; /* 28 */
+  --uds-text-body-lg: 1.125rem; /* 18 */
+  --uds-text-body: 1rem; /* 16 */
+  --uds-text-caption: 0.875rem; /* 14 */
+  --uds-text-overline: 0.75rem; /* 12 */
+
+  /* Line heights */
+  --uds-leading-h1: 1.05;
+  --uds-leading-h2: 1.15;
+  --uds-leading-h3: 1.2;
+  --uds-leading-h4: 1.25;
+  --uds-leading-body: 1.6;
+  --uds-leading-caption: 1.45;
+  --uds-leading-tight: 1.2;
+  --uds-leading-relaxed: 1.75;
+
+  /* Letter spacing */
+  --uds-tracking-h1: -0.03em;
+  --uds-tracking-h2: -0.025em;
+  --uds-tracking-h3: -0.02em;
+  --uds-tracking-h4: -0.015em;
+  --uds-tracking-body: 0;
+  --uds-tracking-caption: 0.01em;
+  --uds-tracking-overline: 0.08em;
+
+  /* Font weights */
+  --uds-weight-regular: 400;
+  --uds-weight-medium: 500;
+  --uds-weight-semibold: 600;
+  --uds-weight-bold: 700;
+}
