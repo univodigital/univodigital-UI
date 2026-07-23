@@ -20,6 +20,11 @@ import {
 const WhyChooseUs = dynamic(() =>
   import("@/components/sections/why-choose-us").then((m) => m.WhyChooseUs),
 );
+const InteractiveServices = dynamic(() =>
+  import("@/components/sections/interactive-services").then(
+    (m) => m.InteractiveServices,
+  ),
+);
 const ServicesPreview = dynamic(() =>
   import("@/components/sections/services-preview").then(
     (m) => m.ServicesPreview,
@@ -67,6 +72,7 @@ export default function Home() {
 
       <main id="main-content" tabIndex={-1} className="outline-none">
         <Hero />
+        <InteractiveServices />
         <WhyChooseUs />
         <ServicesPreview />
         <PortfolioPreview />

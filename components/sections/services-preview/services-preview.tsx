@@ -27,10 +27,10 @@ export function ServicesPreview({ className }: ServicesPreviewProps) {
 
   return (
     <Section
-      id="services"
+      id="capabilities"
       spacing="lg"
       tone="surface"
-      aria-labelledby="services-heading"
+      aria-labelledby="capabilities-heading"
       className={cn("relative", className)}
     >
       <Container size="max">
@@ -50,7 +50,7 @@ export function ServicesPreview({ className }: ServicesPreviewProps) {
             </motion.p>
 
             <motion.h2
-              id="services-heading"
+              id="capabilities-heading"
               className="font-heading mt-3 text-h2 text-balance text-text-primary"
               initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}

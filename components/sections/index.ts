@@ -4,6 +4,7 @@
 
 export { Hero } from "./hero";
 export { WhyChooseUs } from "./why-choose-us";
+export { InteractiveServices } from "./interactive-services";
 export { ServicesPreview } from "./services-preview";
 export { PortfolioPreview } from "./portfolio-preview";
 export { Process } from "./process";
