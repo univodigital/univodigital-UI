@@ -6,10 +6,16 @@ import { AppProviders } from "@/providers";
 
 import "@/styles/globals.css";
 
+/**
+ * Inter — primary UI typeface (headings + body).
+ * Designed for screens; variable weights + OpenType features (calt, tnum).
+ * @see https://www.figma.com/resource-library/best-fonts-for-websites/#_1-inter
+ */
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
@@ -46,10 +52,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${geistMono.variable} antialiased`}
-      >
+    <html
+      lang="en"
+      className={`${inter.variable} ${geistMono.variable}`}
+    >
+      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

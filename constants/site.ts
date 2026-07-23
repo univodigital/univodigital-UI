@@ -20,6 +20,21 @@ export const SITE = {
   },
 } as const;
 
+/** Official brand assets — wordmark + icon (transparent PNGs). */
+export const BRAND = {
+  logo: "/brand/logo.png",
+  icon: "/brand/icon.png",
+  logoWidth: 727,
+  logoHeight: 276,
+  iconWidth: 208,
+  iconHeight: 299,
+  /** Logo palette — keep CSS tokens in sync (`styles/tokens/colors.css`). */
+  colors: {
+    navy: "#001028",
+    blue: "#0048F8",
+  },
+} as const;
+
 export const SITE_METADATA = {
   title: {
     default: SITE.name,

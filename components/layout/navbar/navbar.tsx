@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useId, useState, type CSSProperties } from "react";
 
+import { BrandLogo } from "@/components/brand";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { MAIN_NAV } from "@/constants/navigation";
 import { ROUTES } from "@/constants/routes";
-import { SITE } from "@/constants/site";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useScrolled } from "@/hooks/use-scrolled";
 import { duration, easing } from "@/lib/design-system/motion";
@@ -77,13 +77,7 @@ export function Navbar({ items = MAIN_NAV, className }: NavbarProps) {
             size="max"
             className="flex h-[var(--navbar-height)] items-center justify-between gap-4"
           >
-            <Link
-              href={ROUTES.home}
-              className="shrink-0 text-base font-semibold tracking-tight text-text-primary outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-              aria-label={`${SITE.name} home`}
-            >
-              {SITE.name}
-            </Link>
+            <BrandLogo variant="responsive" priority />
 
             <nav
               aria-label="Primary"

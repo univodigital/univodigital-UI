@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { SITE } from "@/constants/site";
+
+import { BRAND, SITE } from "@/constants/site";
 import type { PageSeo } from "@/types";
 import { absoluteUrl } from "@/utils/url";
 
@@ -52,6 +53,8 @@ export function organizationJsonLd() {
     url: SITE.url,
     email: SITE.email,
     description: SITE.description,
+    logo: absoluteUrl(BRAND.logo),
+    image: absoluteUrl(BRAND.logo),
   };
 }
 

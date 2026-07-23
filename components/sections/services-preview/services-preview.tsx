@@ -12,30 +12,30 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
 
-import { SERVICE_PREVIEW_ITEMS } from "./data";
-import { ServiceCard } from "./service-card";
+import { SERVICE_CAPABILITIES } from "./data";
+import { ServiceCapabilityCard } from "./service-capability-card";
 
 type ServicesPreviewProps = {
   className?: string;
 };
 
 /**
- * Home Services Preview — interactive cards with imagery and CTA.
+ * Services — 2×2 capability cards (title, tags, illustration) before Portfolio.
  */
 export function ServicesPreview({ className }: ServicesPreviewProps) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <Section
-      id="services-preview"
+      id="services"
       spacing="lg"
       tone="surface"
-      aria-labelledby="services-preview-heading"
+      aria-labelledby="services-heading"
       className={cn("relative", className)}
     >
       <Container size="max">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-xl">
             <motion.p
               className="text-caption font-medium tracking-wide text-accent uppercase"
               initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
@@ -50,7 +50,7 @@ export function ServicesPreview({ className }: ServicesPreviewProps) {
             </motion.p>
 
             <motion.h2
-              id="services-preview-heading"
+              id="services-heading"
               className="font-heading mt-3 text-h2 text-balance text-text-primary"
               initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -61,23 +61,8 @@ export function ServicesPreview({ className }: ServicesPreviewProps) {
                 delay: prefersReducedMotion ? 0 : 0.05,
               }}
             >
-              Capabilities built to grow your brand
+              What we take on with you
             </motion.h2>
-
-            <motion.p
-              className="mt-4 text-body-lg text-pretty text-text-secondary"
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : duration.normal,
-                ease: easing.standard,
-                delay: prefersReducedMotion ? 0 : 0.1,
-              }}
-            >
-              From identity to acquisition — explore how Univo Digital helps
-              ambitious teams look sharper and perform better.
-            </motion.p>
           </div>
 
           <motion.div
@@ -88,38 +73,23 @@ export function ServicesPreview({ className }: ServicesPreviewProps) {
             transition={{
               duration: prefersReducedMotion ? 0 : duration.normal,
               ease: easing.standard,
-              delay: prefersReducedMotion ? 0 : 0.12,
+              delay: prefersReducedMotion ? 0 : 0.1,
             }}
           >
-            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link href={ROUTES.services.root}>View all services</Link>
+            <Button asChild variant="accent" size="lg" className="w-full sm:w-auto">
+              <Link href={ROUTES.contact}>Talk through a brief</Link>
             </Button>
           </motion.div>
         </div>
 
         <StaggerContainer
-          className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-16 lg:gap-6"
+          className="mt-10 grid grid-cols-1 gap-5 md:mt-12 md:grid-cols-2 md:gap-6 lg:mt-14"
           once
         >
-          {SERVICE_PREVIEW_ITEMS.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+          {SERVICE_CAPABILITIES.map((service) => (
+            <ServiceCapabilityCard key={service.id} service={service} />
           ))}
         </StaggerContainer>
-
-        <motion.div
-          className="mt-10 flex justify-center sm:mt-12"
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{
-            duration: prefersReducedMotion ? 0 : duration.normal,
-            ease: easing.standard,
-          }}
-        >
-          <Button asChild size="lg">
-            <Link href={ROUTES.contact}>Start a project</Link>
-          </Button>
-        </motion.div>
       </Container>
     </Section>
   );

@@ -15,9 +15,13 @@
 
   html {
     @apply font-sans antialiased;
+    font-family: var(--uds-font-body);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Inter OpenType — contextual alternates for screen readability */
+    font-feature-settings: "calt" 1, "kern" 1;
+    font-optical-sizing: auto;
   }
 
   body {
@@ -33,6 +37,7 @@
   h6 {
     font-family: var(--uds-font-heading);
     color: var(--uds-color-text-primary);
+    font-feature-settings: "calt" 1, "kern" 1;
   }
 
   h1 {

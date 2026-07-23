@@ -1,34 +1,37 @@
 /**
  * Univo Digital — Color tokens
+ * Brand palette derived from official logo:
+ *   Navy   #001028  → primary / text
+ *   Blue   #0048F8  → accent / focus
  * Semantic tokens only. Do not use raw hex/oklch in components.
  */
 
 :root {
-  /* Brand / semantic */
-  --uds-color-primary: oklch(0.22 0.02 250);
+  /* Brand — logo navy + electric blue */
+  --uds-color-primary: oklch(0.175 0.056 254); /* #001028 */
   --uds-color-primary-foreground: oklch(0.99 0 0);
-  --uds-color-secondary: oklch(0.96 0.005 250);
-  --uds-color-secondary-foreground: oklch(0.22 0.02 250);
-  --uds-color-accent: oklch(0.55 0.12 195);
+  --uds-color-secondary: oklch(0.96 0.012 254);
+  --uds-color-secondary-foreground: oklch(0.175 0.056 254);
+  --uds-color-accent: oklch(0.505 0.265 263); /* #0048F8 */
   --uds-color-accent-foreground: oklch(0.99 0 0);
 
-  /* Surfaces */
+  /* Surfaces — cool navy-tinted whites */
   --uds-color-background: oklch(1 0 0);
-  --uds-color-surface: oklch(0.985 0.002 250);
+  --uds-color-surface: oklch(0.985 0.006 254);
   --uds-color-surface-elevated: oklch(1 0 0);
-  --uds-color-muted: oklch(0.96 0.005 250);
-  --uds-color-muted-foreground: oklch(0.5 0.01 250);
+  --uds-color-muted: oklch(0.96 0.01 254);
+  --uds-color-muted-foreground: oklch(0.48 0.03 254);
 
   /* Text */
-  --uds-color-text-primary: oklch(0.18 0.015 250);
-  --uds-color-text-secondary: oklch(0.45 0.01 250);
+  --uds-color-text-primary: oklch(0.175 0.056 254); /* logo navy */
+  --uds-color-text-secondary: oklch(0.45 0.03 254);
   --uds-color-text-inverse: oklch(0.99 0 0);
 
   /* Borders & focus */
-  --uds-color-border: oklch(0.9 0.005 250);
-  --uds-color-border-strong: oklch(0.82 0.01 250);
-  --uds-color-ring: oklch(0.55 0.12 195);
-  --uds-color-input: oklch(0.9 0.005 250);
+  --uds-color-border: oklch(0.9 0.012 254);
+  --uds-color-border-strong: oklch(0.82 0.02 254);
+  --uds-color-ring: oklch(0.505 0.265 263); /* accent blue */
+  --uds-color-input: oklch(0.9 0.012 254);
 
   /* Feedback */
   --uds-color-success: oklch(0.55 0.14 150);
@@ -63,11 +66,11 @@
   --success: var(--uds-color-success);
   --warning: var(--uds-color-warning);
   --danger: var(--uds-color-danger);
-  --chart-1: oklch(0.55 0.12 195);
-  --chart-2: oklch(0.45 0.02 250);
-  --chart-3: oklch(0.65 0.08 195);
-  --chart-4: oklch(0.35 0.02 250);
-  --chart-5: oklch(0.75 0.06 195);
+  --chart-1: oklch(0.505 0.265 263);
+  --chart-2: oklch(0.175 0.056 254);
+  --chart-3: oklch(0.62 0.18 263);
+  --chart-4: oklch(0.35 0.05 254);
+  --chart-5: oklch(0.72 0.12 263);
   --sidebar: var(--uds-color-surface);
   --sidebar-foreground: var(--uds-color-text-primary);
   --sidebar-primary: var(--uds-color-primary);
@@ -79,26 +82,27 @@
 }
 
 .dark {
-  --uds-color-primary: oklch(0.92 0.01 250);
-  --uds-color-primary-foreground: oklch(0.2 0.02 250);
-  --uds-color-secondary: oklch(0.26 0.015 250);
-  --uds-color-secondary-foreground: oklch(0.95 0.005 250);
-  --uds-color-accent: oklch(0.7 0.12 195);
-  --uds-color-accent-foreground: oklch(0.15 0.02 195);
+  /* Surfaces sit in logo navy; accent stays electric blue */
+  --uds-color-primary: oklch(0.92 0.02 254);
+  --uds-color-primary-foreground: oklch(0.175 0.056 254);
+  --uds-color-secondary: oklch(0.24 0.04 254);
+  --uds-color-secondary-foreground: oklch(0.95 0.01 254);
+  --uds-color-accent: oklch(0.62 0.22 263);
+  --uds-color-accent-foreground: oklch(0.12 0.04 263);
 
-  --uds-color-background: oklch(0.16 0.015 250);
-  --uds-color-surface: oklch(0.2 0.015 250);
-  --uds-color-surface-elevated: oklch(0.24 0.015 250);
-  --uds-color-muted: oklch(0.26 0.015 250);
-  --uds-color-muted-foreground: oklch(0.7 0.01 250);
+  --uds-color-background: oklch(0.16 0.04 254);
+  --uds-color-surface: oklch(0.2 0.045 254);
+  --uds-color-surface-elevated: oklch(0.24 0.05 254);
+  --uds-color-muted: oklch(0.26 0.04 254);
+  --uds-color-muted-foreground: oklch(0.72 0.03 254);
 
-  --uds-color-text-primary: oklch(0.97 0.005 250);
-  --uds-color-text-secondary: oklch(0.7 0.01 250);
-  --uds-color-text-inverse: oklch(0.18 0.015 250);
+  --uds-color-text-primary: oklch(0.97 0.01 254);
+  --uds-color-text-secondary: oklch(0.72 0.03 254);
+  --uds-color-text-inverse: oklch(0.175 0.056 254);
 
   --uds-color-border: oklch(1 0 0 / 12%);
   --uds-color-border-strong: oklch(1 0 0 / 20%);
-  --uds-color-ring: oklch(0.7 0.12 195);
+  --uds-color-ring: oklch(0.62 0.22 263);
   --uds-color-input: oklch(1 0 0 / 15%);
 
   --uds-color-success: oklch(0.65 0.14 150);
@@ -108,10 +112,10 @@
   --uds-color-danger: oklch(0.68 0.18 25);
   --uds-color-danger-foreground: oklch(0.99 0 0);
 
-  --chart-1: oklch(0.7 0.12 195);
-  --chart-2: oklch(0.7 0.01 250);
-  --chart-3: oklch(0.6 0.08 195);
-  --chart-4: oklch(0.5 0.02 250);
-  --chart-5: oklch(0.8 0.06 195);
-  --sidebar-primary: oklch(0.65 0.12 195);
+  --chart-1: oklch(0.62 0.22 263);
+  --chart-2: oklch(0.75 0.03 254);
+  --chart-3: oklch(0.55 0.18 263);
+  --chart-4: oklch(0.45 0.05 254);
+  --chart-5: oklch(0.75 0.14 263);
+  --sidebar-primary: oklch(0.62 0.22 263);
 }

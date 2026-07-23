@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 
-import { StaggerContainer } from "@/animations";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
@@ -13,18 +13,18 @@ import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
 
 import { PORTFOLIO_PREVIEW_ITEMS } from "./data";
-import { PortfolioCard } from "./portfolio-card";
+import { PortfolioCarousel } from "./portfolio-carousel";
 
 type PortfolioPreviewProps = {
   className?: string;
 };
 
 /**
- * Home Portfolio Preview — featured projects with hover zoom and CTAs.
+ * Home Portfolio Preview — horizontal sliding featured work cards.
+ * Track bleeds past the container so the next card peeks on the right.
  */
 export function PortfolioPreview({ className }: PortfolioPreviewProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [featured, ...rest] = PORTFOLIO_PREVIEW_ITEMS;
 
   return (
     <Section
@@ -32,10 +32,10 @@ export function PortfolioPreview({ className }: PortfolioPreviewProps) {
       spacing="lg"
       tone="default"
       aria-labelledby="portfolio-preview-heading"
-      className={cn("relative", className)}
+      className={cn("relative overflow-x-clip", className)}
     >
       <Container size="max">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
             <motion.p
               className="text-caption font-medium tracking-wide text-accent uppercase"
@@ -64,21 +64,6 @@ export function PortfolioPreview({ className }: PortfolioPreviewProps) {
             >
               Featured work
             </motion.h2>
-
-            <motion.p
-              className="mt-4 text-body-lg text-pretty text-text-secondary"
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : duration.normal,
-                ease: easing.standard,
-                delay: prefersReducedMotion ? 0 : 0.1,
-              }}
-            >
-              A selection of brand, web, social, and growth projects crafted for
-              ambitious teams.
-            </motion.p>
           </div>
 
           <motion.div
@@ -89,51 +74,37 @@ export function PortfolioPreview({ className }: PortfolioPreviewProps) {
             transition={{
               duration: prefersReducedMotion ? 0 : duration.normal,
               ease: easing.standard,
-              delay: prefersReducedMotion ? 0 : 0.12,
+              delay: prefersReducedMotion ? 0 : 0.1,
             }}
           >
             <Button
               asChild
-              variant="outline"
+              variant="accent"
               size="lg"
               className="w-full sm:w-auto"
             >
-              <Link href={ROUTES.portfolio.root}>View all projects</Link>
+              <Link href={ROUTES.portfolio.root}>
+                Our projects
+                <ArrowUpRightIcon className="size-4" aria-hidden />
+              </Link>
             </Button>
           </motion.div>
         </div>
-
-        <StaggerContainer
-          className="mt-12 grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:mt-16 lg:gap-6"
-          once
-        >
-          {featured ? (
-            <PortfolioCard
-              project={featured}
-              featuredLayout
-              priority
-            />
-          ) : null}
-          {rest.map((project) => (
-            <PortfolioCard key={project.id} project={project} />
-          ))}
-        </StaggerContainer>
-
-        <motion.div
-          className="mt-10 flex justify-center sm:mt-12"
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{
-            duration: prefersReducedMotion ? 0 : duration.normal,
-            ease: easing.standard,
-          }}
-        >
-          <Button asChild size="lg">
-            <Link href={ROUTES.contact}>Start a project</Link>
-          </Button>
-        </motion.div>
       </Container>
+
+      <motion.div
+        className="mt-10 md:mt-12 lg:mt-14"
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{
+          duration: prefersReducedMotion ? 0 : duration.slow,
+          ease: easing.emphasized,
+          delay: prefersReducedMotion ? 0 : 0.08,
+        }}
+      >
+        <PortfolioCarousel projects={PORTFOLIO_PREVIEW_ITEMS} />
+      </motion.div>
     </Section>
   );
 }

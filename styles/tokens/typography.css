@@ -1,14 +1,16 @@
 /**
  * Univo Digital — Typography scale
- * Headings: Inter (General Sans optional local override)
- * Body: Inter
+ * Primary: Inter (sans) for headings + body — screen-optimized UI typeface
+ * Mono: Geist Mono for code
  *
  * H1 64–72 | H2 48 | H3 36 | H4 28 | Body 18/16 | Caption 14
  */
 
 :root {
-  --uds-font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --uds-font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --uds-font-heading: var(--font-inter), "Inter", ui-sans-serif, system-ui,
+    sans-serif;
+  --uds-font-body: var(--font-inter), "Inter", ui-sans-serif, system-ui,
+    sans-serif;
   --uds-font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   /* Font sizes */

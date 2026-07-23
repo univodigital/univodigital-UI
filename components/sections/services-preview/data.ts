@@ -1,74 +1,78 @@
-import type { LucideIcon } from "lucide-react";
-import {
-  GlobeIcon,
-  MegaphoneIcon,
-  PaletteIcon,
-  RocketIcon,
-} from "lucide-react";
+export type ServiceCapabilityId =
+  | "branding"
+  | "website-development"
+  | "social-media"
+  | "performance";
 
-import { ROUTES } from "@/constants/routes";
-import type { ServiceSlug } from "@/types";
-
-export type ServicePreviewItem = {
-  id: string;
-  slug: ServiceSlug;
+export type ServiceCapability = {
+  id: ServiceCapabilityId;
   title: string;
-  summary: string;
-  href: string;
-  icon: LucideIcon;
-  /** Optional cover image path under /public */
-  imageSrc?: string;
-  imageAlt: string;
-  accent: "branding" | "web" | "social" | "performance";
+  description: string;
+  tags: readonly string[];
 };
 
-export const SERVICE_PREVIEW_ITEMS: ServicePreviewItem[] = [
+/**
+ * Four Univo capability cards — display-only home grid (not navigation).
+ */
+export const SERVICE_CAPABILITIES: readonly ServiceCapability[] = [
   {
     id: "branding",
-    slug: "branding",
-    title: "Branding",
-    summary:
-      "Identity systems, verbal strategy, and visual language that make your brand unmistakable.",
-    href: ROUTES.services.branding,
-    icon: PaletteIcon,
-    imageSrc: "/images/services/branding.svg",
-    imageAlt: "Abstract branding visual",
-    accent: "branding",
+    title: "Branding that sticks",
+    description:
+      "From positioning to visual systems, we shape brands that feel clear in the room and consistent everywhere they show up.",
+    tags: [
+      "Positioning",
+      "Logo & Identity",
+      "Brand Guidelines",
+      "Messaging",
+      "Art Direction",
+      "Launch Kits",
+    ],
   },
   {
-    id: "website",
-    slug: "website-development",
-    title: "Website Development",
-    summary:
-      "High-performance marketing sites and product experiences built for clarity and conversion.",
-    href: ROUTES.services.websiteDevelopment,
-    icon: GlobeIcon,
-    imageSrc: "/images/services/website.svg",
-    imageAlt: "Abstract website development visual",
-    accent: "web",
+    id: "website-development",
+    title: "Websites that perform",
+    description:
+      "Clean, fast sites built on modern stacks — easy to manage, sharp on every screen, and ready for the traffic you want.",
+    tags: [
+      "Product Sites",
+      "Marketing Sites",
+      "Design Systems",
+      "CMS Setup",
+      "Motion & Micro-UX",
+      "Handoff & Support",
+    ],
   },
   {
-    id: "social",
-    slug: "social-media-marketing",
-    title: "Social Media Marketing",
-    summary:
-      "Content systems and channel strategy that grow audience trust and keep your brand present.",
-    href: ROUTES.services.socialMediaMarketing,
-    icon: MegaphoneIcon,
-    imageSrc: "/images/services/social.svg",
-    imageAlt: "Abstract social media visual",
-    accent: "social",
+    id: "social-media",
+    title: "Social that compounds",
+    description:
+      "A steady creative engine — calendars, campaigns, and community work that keep your brand present without sounding generic.",
+    tags: [
+      "Channel Strategy",
+      "Content Calendars",
+      "Campaign Creatives",
+      "Community Care",
+      "Creator Collabs",
+      "Reporting",
+    ],
   },
   {
     id: "performance",
-    slug: "performance-marketing",
-    title: "Performance Marketing",
-    summary:
-      "Paid acquisition and measurement frameworks focused on efficient growth and clear ROI.",
-    href: ROUTES.services.performanceMarketing,
-    icon: RocketIcon,
-    imageSrc: "/images/services/performance.svg",
-    imageAlt: "Abstract performance marketing visual",
-    accent: "performance",
+    title: "Growth you can measure",
+    description:
+      "Search, paid, and conversion work tied to real numbers — so spend, content, and experiments all pull in the same direction.",
+    tags: [
+      "Search Visibility",
+      "Paid Acquisition",
+      "Landing Pages",
+      "Analytics Setup",
+      "Experimentation",
+      "Funnel Reviews",
+    ],
   },
-];
+] as const;
+
+/** @deprecated Prefer SERVICE_CAPABILITIES */
+export const SERVICE_PREVIEW_ITEMS = SERVICE_CAPABILITIES;
+export type ServicePreviewItem = ServiceCapability;

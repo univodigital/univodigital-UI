@@ -1,5 +1,6 @@
 export { PortfolioPreview } from "./portfolio-preview";
 export { PortfolioCard } from "./portfolio-card";
+export { PortfolioCarousel } from "./portfolio-carousel";
 export { PortfolioImage } from "./portfolio-image";
 export {
   PORTFOLIO_PREVIEW_ITEMS,

@@ -2,6 +2,7 @@ import { MailIcon, PhoneIcon } from "lucide-react";
 import Link from "next/link";
 import type { ComponentType, ReactNode, SVGProps } from "react";
 
+import { BrandLogo } from "@/components/brand";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { FOOTER_NAV, SOCIAL_LINKS } from "@/constants/navigation";
@@ -97,13 +98,7 @@ export function Footer({ className }: FooterProps) {
       <Container size="max" className="py-12 md:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="sm:col-span-2 lg:col-span-4">
-            <Link
-              href={ROUTES.home}
-              className="inline-block text-base font-semibold tracking-tight text-text-primary outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-              aria-label={`${SITE.name} home`}
-            >
-              {SITE.name}
-            </Link>
+            <BrandLogo variant="wordmark" />
             <p className="mt-3 max-w-sm text-sm text-text-secondary">
               {SITE.tagline}
             </p>
