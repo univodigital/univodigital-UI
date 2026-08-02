@@ -59,7 +59,7 @@ export const FOOTER_NAV: FooterColumn[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/company/univodigital",
+    href: "https://www.linkedin.com/company/univo-digital/",
     icon: "linkedin",
   },
   {

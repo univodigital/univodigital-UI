@@ -29,7 +29,7 @@ export function CompanyLogos({ companies, className }: CompanyLogosProps) {
         Trusted by teams like
       </p>
       <motion.ul
-        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
+        className="mx-auto grid max-w-md grid-cols-2 gap-3 sm:max-w-lg"
         aria-label="Client companies"
         initial="hidden"
         whileInView="visible"

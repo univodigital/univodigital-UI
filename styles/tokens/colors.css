@@ -21,6 +21,14 @@
   --uds-color-surface-elevated: oklch(1 0 0);
   --uds-color-muted: oklch(0.96 0.01 254);
   --uds-color-muted-foreground: oklch(0.48 0.03 254);
+  /* Always-light elevated surfaces (e.g. cards on forced-dark pages) */
+  --uds-color-surface-light: oklch(0.96 0.01 254);
+  --uds-color-surface-light-foreground: oklch(0.175 0.056 254);
+  --uds-color-surface-light-muted-foreground: oklch(0.45 0.03 254);
+  --uds-color-surface-light-border: oklch(0.82 0.02 254);
+  /* Fixed primary band — always logo navy + light text (CTA sections on any theme) */
+  --uds-color-primary-band: oklch(0.175 0.056 254);
+  --uds-color-primary-band-foreground: oklch(0.99 0 0);
 
   /* Text */
   --uds-color-text-primary: oklch(0.175 0.056 254); /* logo navy */

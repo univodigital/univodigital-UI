@@ -2,18 +2,14 @@
 
 import { motion } from "framer-motion";
 
+import { getFeaturedPortfolioProjects } from "@/data/portfolio-projects";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing, motion as motionTokens } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
 
-const CLIENT_PLACEHOLDERS = [
-  "Northline",
-  "Vespera",
-  "Cobalt Lab",
-  "Atelier Nine",
-  "Kinetic Co",
-  "Plainform",
-] as const;
+const CLIENT_PLACEHOLDERS = getFeaturedPortfolioProjects().map(
+  (project) => project.client,
+);
 
 type HeroLogosProps = {
   className?: string;
@@ -31,7 +27,7 @@ export function HeroLogos({ className }: HeroLogosProps) {
         Trusted by ambitious teams
       </p>
       <motion.ul
-        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
+        className="mx-auto grid max-w-md grid-cols-2 gap-3 sm:max-w-lg"
         aria-label="Client logos"
         initial="hidden"
         whileInView="visible"

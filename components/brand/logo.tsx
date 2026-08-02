@@ -40,7 +40,7 @@ export function BrandLogo({
           height={BRAND.logoHeight}
           priority={priority}
           className={cn(
-            "h-7 w-auto md:h-8",
+            "h-7 w-auto md:h-8 dark:brightness-0 dark:invert",
             variant === "responsive" && "hidden sm:block",
           )}
         />
@@ -53,7 +53,7 @@ export function BrandLogo({
           height={BRAND.iconHeight}
           priority={priority}
           className={cn(
-            "h-8 w-auto",
+            "h-8 w-auto dark:brightness-0 dark:invert",
             variant === "responsive" && "sm:hidden",
           )}
         />

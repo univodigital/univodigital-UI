@@ -1,3 +1,5 @@
+import { getFeaturedPortfolioProjects } from "@/data/portfolio-projects";
+
 export type TestimonialPreview = {
   id: string;
   name: string;
@@ -19,7 +21,7 @@ export const TESTIMONIALS: TestimonialPreview[] = [
     id: "1",
     name: "Aisha Rahman",
     role: "Head of Brand",
-    company: "Northline",
+    company: "Soil2Spoon",
     quote:
       "Univo Digital gave our brand a sharper voice and a digital presence that finally matches how we operate. The process was clear, collaborative, and fast.",
     rating: 5,
@@ -29,7 +31,7 @@ export const TESTIMONIALS: TestimonialPreview[] = [
     id: "2",
     name: "Marcus Chen",
     role: "Founder",
-    company: "Vespera",
+    company: "Taglio",
     quote:
       "They didn't just design a website — they built a conversion system. Launch week performance exceeded every benchmark we set.",
     rating: 5,
@@ -39,7 +41,7 @@ export const TESTIMONIALS: TestimonialPreview[] = [
     id: "3",
     name: "Priya Nair",
     role: "Marketing Director",
-    company: "Cobalt Lab",
+    company: "Soil2Spoon",
     quote:
       "Our social content finally feels intentional. The team connected creative direction with measurable outcomes without slowing us down.",
     rating: 5,
@@ -49,7 +51,7 @@ export const TESTIMONIALS: TestimonialPreview[] = [
     id: "4",
     name: "Daniel Okonkwo",
     role: "Growth Lead",
-    company: "Atelier Nine",
+    company: "Taglio",
     quote:
       "Paid acquisition used to feel noisy. Univo brought structure, sharper landing experiences, and reporting we actually trust.",
     rating: 5,
@@ -59,7 +61,7 @@ export const TESTIMONIALS: TestimonialPreview[] = [
     id: "5",
     name: "Elena Brooks",
     role: "CEO",
-    company: "Kinetic Co",
+    company: "Soil2Spoon",
     quote:
       "Premium craft with commercial thinking. Rare combination — and exactly what we needed for our next stage of growth.",
     rating: 5,
@@ -67,11 +69,8 @@ export const TESTIMONIALS: TestimonialPreview[] = [
   },
 ];
 
-export const TESTIMONIAL_COMPANIES: CompanyLogo[] = [
-  { id: "northline", name: "Northline" },
-  { id: "vespera", name: "Vespera" },
-  { id: "cobalt", name: "Cobalt Lab" },
-  { id: "atelier", name: "Atelier Nine" },
-  { id: "kinetic", name: "Kinetic Co" },
-  { id: "plainform", name: "Plainform" },
-];
+export const TESTIMONIAL_COMPANIES: CompanyLogo[] =
+  getFeaturedPortfolioProjects().map((project) => ({
+    id: project.slug,
+    name: project.client,
+  }));
