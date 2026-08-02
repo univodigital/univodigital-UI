@@ -14,6 +14,7 @@ import {
   motion as motionTokens,
 } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import { cardSurfaceClassName } from "@/components/ui/card";
 
 import { ABOUT_PROCESS } from "./data";
 
@@ -193,7 +194,8 @@ export function AboutProcess({ className }: AboutProcessProps) {
                     />
                     <motion.div
                       className={cn(
-                        "relative flex size-14 items-center justify-center rounded-full border border-border bg-card/80 shadow-sm backdrop-blur-sm",
+                        cardSurfaceClassName("solid"),
+                        "relative flex size-14 items-center justify-center rounded-full shadow-sm",
                         "ring-1 ring-border/60 transition-[border-color,box-shadow] duration-[var(--uds-duration-normal)]",
                         "group-hover/step:border-accent/40 group-hover/step:ring-accent/25",
                       )}
@@ -261,7 +263,7 @@ export function AboutProcess({ className }: AboutProcessProps) {
                     prefersReducedMotion ? reducedMotionVariant : fadeUp
                   }
                 >
-                  <div className="mb-4 flex size-14 items-center justify-center rounded-full border border-border bg-card/80 ring-1 ring-border/60 backdrop-blur-sm">
+                  <div className={cn(cardSurfaceClassName("solid"), "mb-4 flex size-14 items-center justify-center rounded-full")}>
                     <Icon
                       className="size-5 text-accent"
                       strokeWidth={1.75}

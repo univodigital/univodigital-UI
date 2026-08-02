@@ -17,6 +17,7 @@ import {
   motion as motionTokens,
 } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import { cardSurfaceClassName } from "@/components/ui/card";
 
 type ProjectHeroProps = {
   project: PortfolioProject;
@@ -112,7 +113,7 @@ export function ProjectHero({ project, className }: ProjectHeroProps) {
             </motion.h1>
 
             <motion.p
-              className="mt-5 max-w-2xl text-body-lg text-pretty text-text-primary/90 md:text-xl"
+              className="mt-5 max-w-2xl text-body-lg text-pretty text-text-primary md:text-xl"
               variants={itemVariants(prefersReducedMotion)}
             >
               {project.subtitle}
@@ -129,7 +130,7 @@ export function ProjectHero({ project, className }: ProjectHeroProps) {
           </div>
 
           <motion.div
-            className="relative mt-10 overflow-hidden rounded-2xl border border-border/80 bg-card/40 shadow-xs backdrop-blur-sm md:mt-12"
+            className={cn(cardSurfaceClassName("media"), "relative mt-10 md:mt-12")}
             variants={itemVariants(prefersReducedMotion)}
           >
             <div className="relative aspect-[16/10] w-full sm:aspect-[21/9]">

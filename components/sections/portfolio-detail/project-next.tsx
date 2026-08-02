@@ -14,6 +14,11 @@ import {
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import {
+  cardSurfaceClassName,
+  cardSurfaceLightDescriptionClassName,
+  cardSurfaceLightTitleClassName,
+} from "@/components/ui/card";
 
 type ProjectNextProps = {
   nextProject: PortfolioProject;
@@ -78,7 +83,8 @@ export function ProjectNext({ nextProject, className }: ProjectNextProps) {
           <Link
             href={href}
             className={cn(
-              "group/next flex flex-col overflow-hidden rounded-2xl border border-surface-light-border bg-surface-light text-surface-light-foreground shadow-xs outline-none",
+              cardSurfaceClassName("surfaceLight"),
+              "group/next flex flex-col overflow-hidden outline-none",
               "transition-[border-color,box-shadow,transform] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
               "hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-card-hover",
               "focus-visible:ring-3 focus-visible:ring-ring/50",
@@ -99,20 +105,20 @@ export function ProjectNext({ nextProject, className }: ProjectNextProps) {
 
             <div className="flex flex-1 items-center justify-between gap-4 p-6 sm:p-8">
               <div className="min-w-0">
-                <p className="text-caption text-surface-light-muted-foreground">
+                <p className={cn("text-caption", cardSurfaceLightDescriptionClassName)}>
                   {nextProject.categoryLabel} · {nextProject.year}
                 </p>
-                <p className="font-heading mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                <p className={cn("mt-2 text-2xl sm:text-3xl", cardSurfaceLightTitleClassName)}>
                   {nextProject.title}
                 </p>
-                <p className="mt-2 line-clamp-2 text-sm text-pretty text-surface-light-muted-foreground sm:text-base">
+                <p className={cn("mt-2 line-clamp-2 text-sm sm:text-base", cardSurfaceLightDescriptionClassName)}>
                   {nextProject.subtitle}
                 </p>
               </div>
 
               <span
                 className={cn(
-                  "inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-surface-light-border bg-surface-light-foreground/5 text-surface-light-muted-foreground",
+                  "inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-card-muted-foreground",
                   "transition-[transform,background-color,color,border-color] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
                   "group-hover/next:border-accent/40 group-hover/next:bg-accent group-hover/next:text-accent-foreground",
                   "group-hover/next:translate-x-0.5 group-hover/next:-translate-y-0.5",

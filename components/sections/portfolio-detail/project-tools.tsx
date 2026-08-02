@@ -18,6 +18,11 @@ import { fadeUp, reducedMotionVariant } from "@/animations/variants";
 import { StaggerContainer } from "@/animations";
 import type { PortfolioProject } from "@/data/portfolio-projects";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import {
+  cardIconWrapClassName,
+  cardSurfaceClassName,
+  cardSurfaceLightTitleClassName,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 import { ProjectSection } from "./project-section";
@@ -65,7 +70,8 @@ export function ProjectTools({ project, className }: ProjectToolsProps) {
             <motion.li
               key={tool}
               className={cn(
-                "flex list-none items-center gap-4 rounded-xl border border-surface-light-border bg-surface-light p-4 text-surface-light-foreground shadow-xs",
+                cardSurfaceClassName("surfaceLight"),
+                "flex list-none items-center gap-4 p-4",
                 "transition-[border-color,box-shadow,transform] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
                 "hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-card-hover",
                 "motion-reduce:transform-none",
@@ -73,12 +79,12 @@ export function ProjectTools({ project, className }: ProjectToolsProps) {
               variants={prefersReducedMotion ? reducedMotionVariant : fadeUp}
             >
               <span
-                className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-border/80 bg-accent/10 text-accent"
+                className={cn(cardIconWrapClassName, "size-10 shrink-0 rounded-lg")}
                 aria-hidden
               >
                 <Icon className="size-4" strokeWidth={1.75} />
               </span>
-              <span className="text-sm font-medium sm:text-base">
+              <span className={cn("text-sm font-medium sm:text-base", cardSurfaceLightTitleClassName)}>
                 {tool}
               </span>
             </motion.li>

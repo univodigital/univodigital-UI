@@ -6,6 +6,12 @@ import { fadeUp, reducedMotionVariant } from "@/animations/variants";
 import { StaggerContainer } from "@/animations";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import {
+  cardDescriptionClassName,
+  cardIconWrapClassName,
+  cardSurfaceClassName,
+  cardTitleClassName,
+} from "@/components/ui/card";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
@@ -95,9 +101,8 @@ export function AboutBeliefs({ className }: AboutBeliefsProps) {
               >
                 <div
                   className={cn(
-                    "group/belief relative flex h-full flex-col rounded-2xl border border-border/60 bg-surface-elevated/40 p-6 backdrop-blur-md md:p-7",
-                    "ring-1 ring-border/40 transition-[box-shadow,border-color,ring-color] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
-                    "hover:border-accent/40 hover:ring-accent/25",
+                    cardSurfaceClassName("glassElevated"),
+                    "group/belief relative flex h-full flex-col p-6 md:p-7",
                   )}
                   style={{
                     boxShadow:
@@ -113,14 +118,14 @@ export function AboutBeliefs({ className }: AboutBeliefsProps) {
                     }}
                   />
 
-                  <span className="relative inline-flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-[var(--uds-duration-normal)] group-hover/belief:scale-105">
+                  <span className={cn(cardIconWrapClassName, "relative size-12 transition-transform duration-[var(--uds-duration-normal)] group-hover/belief:scale-105")}>
                     <Icon className="size-5" strokeWidth={1.75} aria-hidden />
                   </span>
 
-                  <h3 className="relative mt-5 font-heading text-lg font-semibold tracking-tight text-text-primary md:text-xl">
+                  <h3 className={cn("relative mt-5 text-lg md:text-xl", cardTitleClassName)}>
                     {belief.title}
                   </h3>
-                  <p className="relative mt-2 text-body text-pretty text-text-secondary">
+                  <p className={cn("relative mt-2", cardDescriptionClassName)}>
                     {belief.description}
                   </p>
                 </div>

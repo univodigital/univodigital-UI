@@ -14,6 +14,14 @@ export {
   CardDescription,
   CardContent,
   cardVariants,
+  cardSurfaceVariants,
+  cardSurfaceClassName,
+  cardTitleClassName,
+  cardDescriptionClassName,
+  cardMetaClassName,
+  cardIconWrapClassName,
+  cardSurfaceLightTitleClassName,
+  cardSurfaceLightDescriptionClassName,
 } from "./card";
 export { Input, inputVariants } from "./input";
 export { Textarea, textareaVariants } from "./textarea";

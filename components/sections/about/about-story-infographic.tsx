@@ -8,6 +8,11 @@ import { BRAND } from "@/constants/site";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import {
+  cardIconWrapClassName,
+  cardSurfaceClassName,
+  cardTitleClassName,
+} from "@/components/ui/card";
 
 import { STORY_STAGES } from "./data";
 
@@ -40,7 +45,10 @@ export function AboutStoryInfographic({
         return (
           <div key={stage.id} className="flex w-full flex-col items-center">
             <motion.div
-              className="group/stage relative flex w-full items-center gap-4 rounded-2xl border border-border/70 bg-surface/60 px-4 py-3.5 backdrop-blur-sm ring-1 ring-border/40"
+              className={cn(
+                cardSurfaceClassName("solid"),
+                "group/stage relative flex w-full items-center gap-4 px-4 py-3.5",
+              )}
               initial={
                 prefersReducedMotion
                   ? false
@@ -66,11 +74,11 @@ export function AboutStoryInfographic({
                 }}
               />
 
-              <span className="relative inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+              <span className={cn(cardIconWrapClassName, "relative size-11 shrink-0")}>
                 <Icon className="size-5" strokeWidth={1.75} aria-hidden />
               </span>
 
-              <span className="relative font-heading text-base font-semibold tracking-tight text-text-primary md:text-lg">
+              <span className={cn("relative text-base md:text-lg", cardTitleClassName)}>
                 {stage.label}
               </span>
             </motion.div>
@@ -120,7 +128,7 @@ export function AboutStoryInfographic({
 
       {/* Logo merge */}
       <motion.div
-        className="relative mt-1 flex size-20 items-center justify-center rounded-2xl border border-accent/30 bg-surface/70 ring-1 ring-accent/20 backdrop-blur-sm"
+        className={cn(cardSurfaceClassName("solid"), "relative mt-1 flex size-20 items-center justify-center border-accent/30 ring-accent/20")}
         initial={
           prefersReducedMotion
             ? false

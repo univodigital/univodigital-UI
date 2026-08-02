@@ -215,7 +215,10 @@ export function InteractiveServiceCard({
             }
             transition={transition}
           >
-            <h3 className="font-heading text-[1.65rem] leading-[1.12] font-semibold tracking-tight text-white xl:text-[2rem]">
+            <h3
+              className="font-heading text-[1.65rem] leading-[1.12] font-semibold tracking-tight xl:text-[2rem]"
+              style={{ color: panel.foreground }}
+            >
               {service.title}
               {service.subtitle ? (
                 <>
@@ -235,7 +238,8 @@ export function InteractiveServiceCard({
                   exit="exit"
                 >
                   <motion.p
-                    className="max-w-sm text-[0.95rem] leading-relaxed text-pretty text-white/90"
+                    className="max-w-sm text-[0.95rem] leading-relaxed text-pretty"
+                    style={{ color: panel.muted }}
                     variants={revealVariants(motionOff, {
                       y: 20,
                       delayIn: 0.16,
@@ -255,7 +259,8 @@ export function InteractiveServiceCard({
                     {service.bullets.map((bullet, bulletIndex) => (
                       <motion.li
                         key={bullet}
-                        className="flex items-center gap-3 text-sm font-medium text-white"
+                        className="flex items-center gap-3 text-sm font-medium"
+                        style={{ color: panel.foreground }}
                         variants={revealVariants(motionOff, {
                           y: 16,
                           delayIn: 0.24 + bulletIndex * 0.08,
@@ -334,7 +339,10 @@ function MobileExpandedCard({
       style={{ backgroundColor: panel.background }}
     >
       <div>
-        <h3 className="font-heading text-2xl leading-tight font-semibold tracking-tight text-white md:text-3xl">
+        <h3
+          className="font-heading text-2xl leading-tight font-semibold tracking-tight md:text-3xl"
+          style={{ color: panel.foreground }}
+        >
           {service.title}
           {service.subtitle ? (
             <>
@@ -343,14 +351,15 @@ function MobileExpandedCard({
             </>
           ) : null}
         </h3>
-        <p className="mt-4 text-body text-pretty text-white/90">
+        <p className="mt-4 text-body text-pretty" style={{ color: panel.muted }}>
           {service.description}
         </p>
         <ul className="mt-5 flex flex-col gap-3" aria-label="Highlights">
           {service.bullets.map((bullet) => (
             <li
               key={bullet}
-              className="flex items-center gap-3 text-sm font-medium text-white"
+              className="flex items-center gap-3 text-sm font-medium"
+              style={{ color: panel.foreground }}
             >
               <span
                 className="inline-flex size-5 shrink-0 items-center justify-center rounded-full"
