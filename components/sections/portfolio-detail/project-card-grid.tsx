@@ -6,6 +6,10 @@ import { CheckIcon } from "lucide-react";
 import { fadeUp, reducedMotionVariant } from "@/animations/variants";
 import { StaggerContainer } from "@/animations";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import {
+  cardSurfaceClassName,
+  cardSurfaceLightTitleClassName,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 type ProjectCardGridProps = {
@@ -31,7 +35,8 @@ export function ProjectCardGrid({ items, className }: ProjectCardGridProps) {
         <motion.li
           key={item}
           className={cn(
-            "flex list-none items-start gap-3 rounded-xl border border-surface-light-border bg-surface-light p-4 text-surface-light-foreground shadow-sm ring-1 ring-surface-light-border/70",
+            cardSurfaceClassName("surfaceLight"),
+            "flex list-none items-start gap-3 p-4",
             "transition-[border-color,box-shadow,transform] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
             "hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-card-hover",
             "motion-reduce:transform-none",
@@ -44,7 +49,7 @@ export function ProjectCardGrid({ items, className }: ProjectCardGridProps) {
           >
             <CheckIcon className="size-3" strokeWidth={2.5} />
           </span>
-          <span className="text-sm font-medium text-pretty sm:text-base">
+          <span className={cn("text-sm font-medium text-pretty sm:text-base", cardSurfaceLightTitleClassName)}>
             {item}
           </span>
         </motion.li>

@@ -6,6 +6,12 @@ import { fadeUp, reducedMotionVariant } from "@/animations/variants";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import {
+  cardDescriptionClassName,
+  cardMetaClassName,
+  cardSurfaceClassName,
+  cardTitleClassName,
+} from "@/components/ui/card";
 
 import type { ServiceCapability } from "./data";
 import {
@@ -41,8 +47,8 @@ export function ServiceCapabilityCard({
   return (
     <motion.article
       className={cn(
-        "flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card",
-        "p-6 shadow-xs md:p-8",
+        cardSurfaceClassName("solid"),
+        "flex h-full flex-col overflow-hidden p-6 md:p-8",
         className,
       )}
       variants={prefersReducedMotion ? reducedMotionVariant : fadeUp}
@@ -59,10 +65,10 @@ export function ServiceCapabilityCard({
       }
     >
       <div className="flex flex-1 flex-col">
-        <h3 className="font-heading text-xl font-semibold tracking-tight text-text-primary md:text-2xl">
+        <h3 className={cn("text-xl md:text-2xl", cardTitleClassName)}>
           {service.title}
         </h3>
-        <p className="mt-3 max-w-prose text-body text-pretty text-text-secondary">
+        <p className={cn("mt-3 max-w-prose", cardDescriptionClassName)}>
           {service.description}
         </p>
 
@@ -73,7 +79,10 @@ export function ServiceCapabilityCard({
           {service.tags.map((tag) => (
             <li
               key={tag}
-              className="rounded-full border border-border bg-muted/70 px-3 py-1 text-xs font-medium text-text-secondary"
+              className={cn(
+                "rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium",
+                cardMetaClassName,
+              )}
             >
               {tag}
             </li>

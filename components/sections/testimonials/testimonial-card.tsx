@@ -50,7 +50,6 @@ export function TestimonialCard({
         size="lg"
         className={cn(
           "group/testimonial relative h-full overflow-hidden",
-          "border-border/70 bg-card shadow-sm ring-1 ring-border/50",
           "transition-[box-shadow,ring-color] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
           "hover:shadow-card-hover hover:ring-accent/25",
         )}
@@ -80,7 +79,7 @@ export function TestimonialCard({
         </CardHeader>
 
         <CardContent>
-          <CardDescription className="text-body-lg leading-relaxed text-text-primary">
+          <CardDescription className="text-body-lg leading-relaxed text-card-foreground">
             “{testimonial.quote}”
           </CardDescription>
         </CardContent>
@@ -96,10 +95,10 @@ export function TestimonialCard({
             {testimonial.initials}
           </span>
           <div className="min-w-0 text-left">
-            <p className="truncate text-sm font-semibold text-text-primary">
+            <p className="truncate text-sm font-semibold text-card-foreground">
               {testimonial.name}
             </p>
-            <p className="truncate text-caption text-text-secondary">
+            <p className="truncate text-caption text-card-muted-foreground">
               {testimonial.role}, {testimonial.company}
             </p>
           </div>

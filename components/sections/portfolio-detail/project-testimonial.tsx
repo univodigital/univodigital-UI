@@ -9,6 +9,11 @@ import type { PortfolioProject } from "@/data/portfolio-projects";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import {
+  cardMetaClassName,
+  cardSurfaceClassName,
+  cardTitleClassName,
+} from "@/components/ui/card";
 
 type ProjectTestimonialProps = {
   project: PortfolioProject;
@@ -61,8 +66,8 @@ export function ProjectTestimonial({
 
         <motion.blockquote
           className={cn(
-            "relative mx-auto mt-10 max-w-3xl rounded-2xl border border-border/80 bg-card/60 p-8 shadow-xs backdrop-blur-sm",
-            "sm:p-10 md:p-12",
+            cardSurfaceClassName("glass"),
+            "relative mx-auto mt-10 max-w-3xl p-8 sm:p-10 md:p-12",
           )}
           initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +82,7 @@ export function ProjectTestimonial({
             aria-hidden
           />
 
-          <p className="mt-6 text-body-lg leading-relaxed text-pretty text-text-primary md:text-xl">
+          <p className={cn("mt-6 text-body-lg leading-relaxed md:text-xl", cardTitleClassName)}>
             &ldquo;{testimonial.quote}&rdquo;
           </p>
 
@@ -94,10 +99,10 @@ export function ProjectTestimonial({
                 .toUpperCase()}
             </span>
             <cite className="not-italic">
-              <span className="block text-sm font-semibold text-text-primary">
+              <span className={cn("block text-sm", cardTitleClassName)}>
                 {testimonial.author}
               </span>
-              <span className="block text-caption text-text-secondary">
+              <span className={cn("block", cardMetaClassName)}>
                 {project.client}
               </span>
             </cite>

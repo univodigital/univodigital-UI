@@ -6,6 +6,12 @@ import { StaggerContainer } from "@/animations";
 import { fadeUp, reducedMotionVariant } from "@/animations/variants";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import {
+  cardDescriptionClassName,
+  cardIconWrapClassName,
+  cardSurfaceClassName,
+  cardTitleClassName,
+} from "@/components/ui/card";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
@@ -96,9 +102,8 @@ export function AboutWhy({ className }: AboutWhyProps) {
               >
                 <div
                   className={cn(
-                    "group/why relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-surface-elevated/35 p-6 backdrop-blur-md",
-                    "ring-1 ring-border/50 transition-[border-color,ring-color] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
-                    "hover:border-accent/45 hover:ring-accent/30",
+                    cardSurfaceClassName("glassElevated"),
+                    "group/why relative flex h-full flex-col overflow-hidden p-6",
                   )}
                 >
                   {/* Animated border glow sweep */}
@@ -120,7 +125,7 @@ export function AboutWhy({ className }: AboutWhyProps) {
                   />
 
                   <motion.span
-                    className="relative inline-flex size-11 items-center justify-center rounded-xl bg-accent/10 text-accent"
+                    className={cn(cardIconWrapClassName, "relative size-11")}
                     animate={
                       prefersReducedMotion
                         ? undefined
@@ -140,10 +145,10 @@ export function AboutWhy({ className }: AboutWhyProps) {
                     <Icon className="size-5" strokeWidth={1.75} aria-hidden />
                   </motion.span>
 
-                  <h3 className="relative mt-5 font-heading text-lg font-semibold tracking-tight text-text-primary">
+                  <h3 className={cn("relative mt-5 text-lg", cardTitleClassName)}>
                     {feature.title}
                   </h3>
-                  <p className="relative mt-2 text-body text-pretty text-text-secondary">
+                  <p className={cn("relative mt-2", cardDescriptionClassName)}>
                     {feature.description}
                   </p>
                 </div>

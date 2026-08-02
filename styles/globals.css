@@ -73,6 +73,11 @@
     line-height: var(--uds-leading-body);
   }
 
+  /* Card surfaces inherit readable copy tokens from --card-foreground */
+  [data-slot="card"] :where(h1, h2, h3, h4, h5, h6) {
+    color: var(--card-foreground);
+  }
+
   :focus-visible {
     outline: 2px solid var(--uds-color-ring);
     outline-offset: 2px;

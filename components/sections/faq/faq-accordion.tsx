@@ -9,6 +9,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  cardDescriptionClassName,
+  cardSurfaceClassName,
+  cardTitleClassName,
+} from "@/components/ui/card";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import {
   duration,
@@ -66,23 +71,29 @@ export function FaqAccordion({ items, className }: FaqAccordionProps) {
             <AccordionItem
               value={item.id}
               className={cn(
-                "border-border/80 bg-card/80 shadow-xs ring-1 ring-border/40",
+                cardSurfaceClassName("faq"),
                 "transition-[box-shadow,ring-color,background-color] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
-                "hover:bg-card hover:ring-accent/20",
-                "data-[state=open]:bg-card data-[state=open]:ring-accent/25 data-[state=open]:shadow-sm",
+                "data-[state=open]:bg-card",
               )}
             >
               <AccordionTrigger
                 className={cn(
-                  "px-4 py-4 text-base font-semibold text-text-primary hover:no-underline md:px-5 md:text-lg",
-                  "[&_[data-slot=accordion-trigger-icon]]:text-text-secondary",
+                  "px-4 py-4 text-base md:px-5 md:text-lg",
+                  cardTitleClassName,
+                  "hover:no-underline",
+                  "[&_[data-slot=accordion-trigger-icon]]:text-card-muted-foreground",
                   "[&_[data-slot=accordion-trigger-icon]]:transition-transform",
                   "[&_[data-slot=accordion-trigger-icon]]:duration-[var(--uds-duration-normal)]",
                 )}
               >
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="px-4 pb-4 text-body text-pretty text-text-secondary md:px-5 md:pb-5">
+              <AccordionContent
+                className={cn(
+                  "px-4 pb-4 md:px-5 md:pb-5",
+                  cardDescriptionClassName,
+                )}
+              >
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

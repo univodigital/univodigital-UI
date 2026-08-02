@@ -97,6 +97,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     ],
     imageSrc: "/images/portfolio/soil2spoon.jpg",
     imageAlt: "Soil2Spoon e-commerce homepage preview",
+    previewImageSrc: "/images/portfolio/soil2spoon/logo.png",
     gallery: [
       {
         src: "/images/portfolio/soil2spoon.jpg",
@@ -109,6 +110,12 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       {
         src: "/images/portfolio/soil2spoon.jpg",
         alt: "Soil2Spoon mobile storefront preview",
+      },
+      {
+        src: "/images/portfolio/soil2spoon/logo.png",
+        alt: "Soil2Spoon logo and brand identity",
+        label: "Brand Assets",
+        layout: "wide",
       },
     ],
     featured: true,

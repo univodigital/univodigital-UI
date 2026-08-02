@@ -9,6 +9,7 @@ import {
   motion as motionTokens,
 } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import { cardMetaClassName, cardSurfaceClassName } from "@/components/ui/card";
 
 import type { CompanyLogo } from "./data";
 
@@ -62,13 +63,14 @@ export function CompanyLogos({ companies, className }: CompanyLogosProps) {
           >
             <div
               className={cn(
-                "group/logo flex h-14 items-center justify-center rounded-lg border border-border/80 bg-surface/70 px-3",
+                cardSurfaceClassName("logoTile"),
+                "group/logo flex h-14 items-center justify-center px-3",
                 "transition-[border-color,background-color,transform,box-shadow] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
-                "hover:-translate-y-0.5 hover:border-accent/30 hover:bg-card hover:shadow-sm",
+                "hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-sm",
                 "motion-reduce:transform-none",
               )}
             >
-              <span className="truncate text-caption font-semibold tracking-tight text-text-secondary transition-colors duration-[var(--uds-duration-fast)] group-hover/logo:text-text-primary">
+              <span className={cn("truncate font-semibold tracking-tight transition-colors duration-[var(--uds-duration-fast)] group-hover/logo:text-card-foreground", cardMetaClassName)}>
                 {company.name}
               </span>
             </div>

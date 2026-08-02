@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
 import { getAllPortfolioSlugs } from "@/data/portfolio-projects";
+import { getAllServiceSlugs, getServiceHref } from "@/data/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -11,6 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
     changeFrequency: "monthly" as const,
     priority: 0.7,
+  }));
+
+  const servicePages = getAllServiceSlugs().map((slug) => ({
+    url: `${SITE.url}${getServiceHref(slug)}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
   }));
 
   return [
@@ -32,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    ...servicePages,
     {
       url: `${SITE.url}${ROUTES.portfolio.root}`,
       lastModified,

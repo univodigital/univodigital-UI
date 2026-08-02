@@ -18,7 +18,9 @@ import {
 import type { PortfolioGalleryItem, PortfolioProject } from "@/data/portfolio-projects";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
+import { getBrandLogoPresentation } from "@/lib/portfolio-image";
 import { cn } from "@/lib/utils";
+import { cardSurfaceClassName } from "@/components/ui/card";
 
 type ProjectGalleryProps = {
   project: PortfolioProject;
@@ -51,6 +53,9 @@ export function ProjectGallery({ project, className }: ProjectGalleryProps) {
   const [activeItem, setActiveItem] = useState<PortfolioGalleryItem | null>(
     null,
   );
+  const activeLogoPresentation = activeItem
+    ? getBrandLogoPresentation(activeItem.src)
+    : null;
 
   return (
     <>
@@ -105,14 +110,14 @@ export function ProjectGallery({ project, className }: ProjectGalleryProps) {
           >
             {project.gallery.map((item, index) => {
               const layout = item.layout ?? "default";
+              const logoPresentation = getBrandLogoPresentation(item.src);
 
               return (
                 <motion.figure
                   key={`${item.src}-${item.label ?? index}`}
                   className={cn(
-                    "group/gallery relative overflow-hidden rounded-2xl border border-border/80 bg-card/40 shadow-xs backdrop-blur-sm",
-                    "transition-[border-color,box-shadow] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
-                    "hover:border-accent/25 hover:shadow-card-hover",
+                    cardSurfaceClassName("media"),
+                    "group/gallery relative",
                     layoutClasses[layout],
                   )}
                   variants={
@@ -126,6 +131,7 @@ export function ProjectGallery({ project, className }: ProjectGalleryProps) {
                       "relative block w-full cursor-zoom-in overflow-hidden outline-none",
                       "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset",
                       aspectClasses[layout],
+                      logoPresentation.surfaceClassName,
                     )}
                     aria-label={
                       item.label
@@ -143,7 +149,10 @@ export function ProjectGallery({ project, className }: ProjectGalleryProps) {
                           ? "(max-width: 1024px) 100vw, 66vw"
                           : "(max-width: 1024px) 50vw, 33vw"
                       }
-                      className="object-cover object-top transition-transform duration-[var(--uds-duration-slow)] ease-[var(--uds-ease-standard)] motion-reduce:transition-none group-hover/gallery:scale-[1.04]"
+                      className={cn(
+                        "object-top transition-transform duration-[var(--uds-duration-slow)] ease-[var(--uds-ease-standard)] motion-reduce:transition-none group-hover/gallery:scale-[1.04]",
+                        logoPresentation.imageClassName,
+                      )}
                     />
 
                     <span
@@ -158,7 +167,7 @@ export function ProjectGallery({ project, className }: ProjectGalleryProps) {
                     <span
                       className={cn(
                         "absolute right-3 bottom-3 inline-flex size-9 items-center justify-center rounded-full",
-                        "border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-sm",
+                        "border border-border/40 bg-primary/80 text-text-inverse opacity-0 backdrop-blur-sm",
                         "transition-opacity duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
                         "group-hover/gallery:opacity-100 group-focus-visible/gallery:opacity-100",
                       )}
@@ -170,7 +179,7 @@ export function ProjectGallery({ project, className }: ProjectGalleryProps) {
                     {item.label ? (
                       <figcaption
                         className={cn(
-                          "absolute bottom-0 left-0 px-4 pb-4 text-sm font-medium text-white",
+                          "absolute bottom-0 left-0 px-4 pb-4 text-sm font-medium text-text-inverse",
                           "translate-y-1 opacity-0 transition-[transform,opacity] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
                           "group-hover/gallery:translate-y-0 group-hover/gallery:opacity-100",
                           "group-focus-visible/gallery:translate-y-0 group-focus-visible/gallery:opacity-100",
@@ -194,7 +203,7 @@ export function ProjectGallery({ project, className }: ProjectGalleryProps) {
         }}
       >
         <DialogContent
-          className="max-w-5xl border-border/80 bg-card/95 p-2 sm:p-3"
+          className={cn(cardSurfaceClassName("solid"), "max-w-5xl p-2 sm:p-3")}
           showCloseButton
         >
           <DialogTitle className="sr-only">
@@ -203,14 +212,25 @@ export function ProjectGallery({ project, className }: ProjectGalleryProps) {
           <DialogDescription className="sr-only">
             Full-size preview of {activeItem?.alt}
           </DialogDescription>
-          {activeItem ? (
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg">
+          {activeItem && activeLogoPresentation ? (
+            <div
+              className={cn(
+                "relative aspect-[16/10] w-full overflow-hidden rounded-lg",
+                activeLogoPresentation.isLogo
+                  ? activeLogoPresentation.surfaceClassName
+                  : undefined,
+              )}
+            >
               <Image
                 src={activeItem.src}
                 alt={activeItem.alt}
                 fill
                 sizes="(max-width: 1280px) 100vw, 1024px"
-                className="object-contain"
+                className={
+                  activeLogoPresentation.isLogo
+                    ? activeLogoPresentation.imageClassName
+                    : "object-contain"
+                }
                 priority
               />
             </div>

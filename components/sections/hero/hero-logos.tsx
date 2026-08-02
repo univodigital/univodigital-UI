@@ -6,6 +6,7 @@ import { getFeaturedPortfolioProjects } from "@/data/portfolio-projects";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing, motion as motionTokens } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import { cardMetaClassName, cardSurfaceClassName } from "@/components/ui/card";
 
 const CLIENT_PLACEHOLDERS = getFeaturedPortfolioProjects().map(
   (project) => project.client,
@@ -57,9 +58,9 @@ export function HeroLogos({ className }: HeroLogosProps) {
                 },
               },
             }}
-            className="flex h-14 items-center justify-center rounded-lg border border-border/80 bg-surface/60 px-3"
+            className={cn(cardSurfaceClassName("logoTile"), "flex h-14 items-center justify-center px-3")}
           >
-            <span className="truncate text-caption font-semibold tracking-tight text-text-secondary/80">
+            <span className={cn("truncate font-semibold tracking-tight", cardMetaClassName)}>
               {name}
             </span>
           </motion.li>

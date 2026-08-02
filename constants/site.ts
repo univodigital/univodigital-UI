@@ -4,13 +4,13 @@
 export const SITE = {
   name: "Univo Digital",
   legalName: "Univo Digital",
-  tagline: "Premium digital agency for brand, web, and growth.",
+  tagline: "We Don't Just Market Brands. We Build Businesses That Grow.",
   description:
     "Univo Digital is a modern digital agency specializing in branding, website development, social media marketing, and performance marketing.",
   url: "https://univodigital.com",
   locale: "en_US",
-  email: "hello@univodigital.com",
-  phone: "+91 00000 00000",
+  email: "univodigital@gmail.com",
+  phone: "+91 70236 10789",
   address: {
     line1: "",
     city: "",

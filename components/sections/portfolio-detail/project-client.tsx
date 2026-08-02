@@ -8,6 +8,10 @@ import type { PortfolioProject } from "@/data/portfolio-projects";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
+import {
+  cardSurfaceClassName,
+  cardSurfaceLightTitleClassName,
+} from "@/components/ui/card";
 
 import { ProjectSection } from "./project-section";
 
@@ -38,21 +42,19 @@ export function ProjectClient({ project, className }: ProjectClientProps) {
         once
       >
         <motion.div
-          className={cn(
-            "rounded-xl border border-surface-light-border bg-surface-light p-5 text-surface-light-foreground shadow-xs",
-          )}
+          className={cn(cardSurfaceClassName("surfaceLight"), "p-5")}
           variants={prefersReducedMotion ? reducedMotionVariant : fadeUp}
         >
           <p className="text-caption font-medium tracking-wide text-accent uppercase">
             Industry
           </p>
-          <p className="mt-2 text-base">{clientInfo.industry}</p>
+          <p className={cn("mt-2 text-base", cardSurfaceLightTitleClassName)}>
+            {clientInfo.industry}
+          </p>
         </motion.div>
 
         <motion.div
-          className={cn(
-            "rounded-xl border border-surface-light-border bg-surface-light p-5 text-surface-light-foreground shadow-xs",
-          )}
+          className={cn(cardSurfaceClassName("surfaceLight"), "p-5")}
           variants={prefersReducedMotion ? reducedMotionVariant : fadeUp}
         >
           <p className="text-caption font-medium tracking-wide text-accent uppercase">
@@ -60,7 +62,7 @@ export function ProjectClient({ project, className }: ProjectClientProps) {
           </p>
           <ul className="mt-2 space-y-1">
             {clientInfo.services.map((service) => (
-              <li key={service} className="text-base">
+              <li key={service} className={cn("text-base", cardSurfaceLightTitleClassName)}>
                 {service}
               </li>
             ))}
