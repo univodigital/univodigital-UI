@@ -14,6 +14,12 @@
   --color-foreground: var(--uds-color-text-primary);
   --color-surface: var(--uds-color-surface);
   --color-surface-elevated: var(--uds-color-surface-elevated);
+  --color-surface-light: var(--uds-color-surface-light);
+  --color-surface-light-foreground: var(--uds-color-surface-light-foreground);
+  --color-surface-light-muted-foreground: var(--uds-color-surface-light-muted-foreground);
+  --color-surface-light-border: var(--uds-color-surface-light-border);
+  --color-primary-band: var(--uds-color-primary-band);
+  --color-primary-band-foreground: var(--uds-color-primary-band-foreground);
   --color-text-primary: var(--uds-color-text-primary);
   --color-text-secondary: var(--uds-color-text-secondary);
   --color-text-inverse: var(--uds-color-text-inverse);

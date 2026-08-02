@@ -15,7 +15,6 @@ import { cn } from "@/lib/utils";
 import { HeroBackground } from "./hero-background";
 import { HeroLogos } from "./hero-logos";
 import { HeroScrollIndicator } from "./hero-scroll-indicator";
-import { HeroStats } from "./hero-stats";
 
 type HeroProps = {
   className?: string;
@@ -23,7 +22,7 @@ type HeroProps = {
 
 /**
  * Home hero — premium digital agency first impression.
- * Brand → headline → support → CTAs → trust → stats → logos.
+ * Brand → headline → support → CTAs → trust → logos.
  */
 export function Hero({ className }: HeroProps) {
   const prefersReducedMotion = useReducedMotion();
@@ -130,8 +129,7 @@ export function Hero({ className }: HeroProps) {
           </motion.ul>
         </motion.div>
 
-        <div className="mx-auto mt-14 w-full max-w-5xl space-y-10 md:mt-16">
-          <HeroStats />
+        <div className="mx-auto mt-14 w-full max-w-5xl md:mt-16">
           <HeroLogos />
         </div>
 

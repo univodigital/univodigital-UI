@@ -27,7 +27,7 @@ export function ContactCtaBackground({ className }: ContactCtaBackgroundProps) {
       {/* Deep primary field */}
       <div
         className="absolute inset-0"
-        style={{ background: "var(--uds-color-primary)" }}
+        style={{ background: "var(--uds-color-primary-band)" }}
       />
 
       {/* Accent radial wash — center energy */}
@@ -61,7 +61,7 @@ export function ContactCtaBackground({ className }: ContactCtaBackgroundProps) {
         className="absolute inset-0 opacity-[0.28]"
         style={{
           backgroundImage:
-            "radial-gradient(circle, color-mix(in oklab, var(--uds-color-primary-foreground) 55%, transparent) 1px, transparent 1px)",
+            "radial-gradient(circle, color-mix(in oklab, var(--uds-color-primary-band-foreground) 55%, transparent) 1px, transparent 1px)",
           backgroundSize: "1.5rem 1.5rem",
           maskImage:
             "radial-gradient(ellipse 70% 65% at 50% 50%, black 15%, transparent 75%)",
@@ -76,8 +76,8 @@ export function ContactCtaBackground({ className }: ContactCtaBackgroundProps) {
             -32deg,
             transparent,
             transparent 11px,
-            color-mix(in oklab, var(--uds-color-primary-foreground) 40%, transparent) 11px,
-            color-mix(in oklab, var(--uds-color-primary-foreground) 40%, transparent) 12px
+            color-mix(in oklab, var(--uds-color-primary-band-foreground) 40%, transparent) 11px,
+            color-mix(in oklab, var(--uds-color-primary-band-foreground) 40%, transparent) 12px
           )`,
         }}
       />
@@ -87,7 +87,7 @@ export function ContactCtaBackground({ className }: ContactCtaBackgroundProps) {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 35%, color-mix(in oklab, var(--uds-color-primary) 85%, black) 100%)",
+            "radial-gradient(ellipse at center, transparent 35%, color-mix(in oklab, var(--uds-color-primary-band) 85%, black) 100%)",
         }}
       />
 

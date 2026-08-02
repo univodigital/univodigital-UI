@@ -24,6 +24,7 @@ export function PortfolioCard({
   priority = false,
 }: PortfolioCardProps) {
   const href = getPortfolioHref(project.slug);
+  const previewSrc = project.previewImageSrc ?? project.imageSrc;
 
   return (
     <article
@@ -73,12 +74,17 @@ export function PortfolioCard({
         <div className="relative mx-5 mb-5 flex-1 overflow-hidden rounded-xl bg-muted sm:mx-6 sm:mb-6">
           <div className="relative aspect-[4/5] w-full sm:aspect-[3/4]">
             <Image
-              src={project.imageSrc}
+              src={previewSrc}
               alt={project.imageAlt}
               fill
               priority={priority}
               sizes="(max-width: 640px) 85vw, (max-width: 1024px) 70vw, 416px"
-              className="object-cover object-top transition-transform duration-[var(--uds-duration-slow)] ease-[var(--uds-ease-standard)] motion-reduce:transition-none group-hover/project:scale-[1.03]"
+              className={cn(
+                "object-top transition-transform duration-[var(--uds-duration-slow)] ease-[var(--uds-ease-standard)] motion-reduce:transition-none group-hover/project:scale-[1.03]",
+                previewSrc.includes("logo")
+                  ? "object-contain p-6"
+                  : "object-cover",
+              )}
             />
           </div>
         </div>

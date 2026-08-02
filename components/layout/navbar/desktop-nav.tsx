@@ -188,17 +188,17 @@ function NavDropdown({ item }: { item: NavItem }) {
             className="absolute top-full left-0 z-[var(--uds-z-dropdown)] min-w-56 pt-2"
             onKeyDown={onMenuKeyDown}
           >
-            <div className="rounded-xl border border-border bg-popover p-1.5 shadow-dropdown ring-1 ring-foreground/5">
+            <div className="rounded-xl border border-surface-light-border bg-surface-light p-1.5 text-surface-light-foreground shadow-dropdown ring-1 ring-surface-light-border/70">
               <Link
                 href={item.href}
                 role="menuitem"
                 data-nav-dropdown-item
-                className="block rounded-lg px-3 py-2 text-sm font-medium text-text-primary outline-none transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="block rounded-lg px-3 py-2 text-sm font-medium outline-none transition-colors hover:bg-surface-light-foreground/5 focus-visible:bg-surface-light-foreground/5 focus-visible:ring-3 focus-visible:ring-ring/50"
                 onClick={() => setOpen(false)}
               >
                 All {item.label}
               </Link>
-              <div className="my-1 h-px bg-border" role="separator" />
+              <div className="my-1 h-px bg-surface-light-border" role="separator" />
               {children.map((child) => (
                 <Link
                   key={child.href}
@@ -209,10 +209,10 @@ function NavDropdown({ item }: { item: NavItem }) {
                     isNavActive(pathname, child.href) ? "page" : undefined
                   }
                   className={cn(
-                    "block rounded-lg px-3 py-2 text-sm outline-none transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50",
+                    "block rounded-lg px-3 py-2 text-sm outline-none transition-colors hover:bg-surface-light-foreground/5 hover:text-surface-light-foreground focus-visible:bg-surface-light-foreground/5 focus-visible:ring-3 focus-visible:ring-ring/50",
                     isNavActive(pathname, child.href)
-                      ? "font-medium text-text-primary"
-                      : "text-text-secondary",
+                      ? "font-medium text-surface-light-foreground"
+                      : "text-surface-light-muted-foreground",
                   )}
                   onClick={() => setOpen(false)}
                 >

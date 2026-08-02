@@ -16,20 +16,21 @@ import {
 } from "@/lib/design-system/motion";
 import { cn } from "@/lib/utils";
 
-import { ContactCtaBackground } from "./contact-cta-background";
+import { AboutCtaBackground } from "./about-cta-background";
 
-type ContactCtaProps = {
+type AboutCtaProps = {
   className?: string;
 };
 
 function itemVariants(prefersReducedMotion: boolean) {
   return {
     hidden: prefersReducedMotion
-      ? { opacity: 1, y: 0 }
-      : { opacity: 0, y: 22 },
+      ? { opacity: 1, y: 0, filter: "blur(0px)" }
+      : { opacity: 0, y: 22, filter: "blur(8px)" },
     visible: {
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
       transition: {
         duration: prefersReducedMotion ? 0 : duration.slow,
         ease: easing.emphasized,
@@ -39,24 +40,24 @@ function itemVariants(prefersReducedMotion: boolean) {
 }
 
 /**
- * Contact CTA — premium lead-gen band: headline, support, single action.
+ * Final About CTA — consultation + services.
  */
-export function ContactCta({ className }: ContactCtaProps) {
+export function AboutCta({ className }: AboutCtaProps) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <Section
-      id="contact-cta"
+      id="about-cta"
       spacing="none"
       tone="default"
-      aria-labelledby="contact-cta-heading"
+      aria-labelledby="about-cta-heading"
       className={cn("relative isolate overflow-hidden", className)}
     >
-      <ContactCtaBackground />
+      <AboutCtaBackground />
 
       <Container
         size="max"
-        className="relative z-10 py-20 md:py-24 lg:py-28"
+        className="relative z-10 py-24 md:py-28 lg:py-32"
       >
         <motion.div
           className="mx-auto flex max-w-3xl flex-col items-center text-center"
@@ -75,31 +76,23 @@ export function ContactCta({ className }: ContactCtaProps) {
             },
           }}
         >
-          <motion.p
-            className="text-caption font-medium tracking-wide text-[color-mix(in_oklab,var(--uds-color-accent)_85%,white)] uppercase"
-            variants={itemVariants(prefersReducedMotion)}
-          >
-            Next step
-          </motion.p>
-
           <motion.h2
-            id="contact-cta-heading"
-            className="font-heading mt-4 text-h2 text-balance text-primary-band-foreground md:text-[clamp(2.25rem,4vw,3.25rem)]"
+            id="about-cta-heading"
+            className="font-heading text-h2 text-balance text-text-primary md:text-[clamp(2.25rem,4vw,3.5rem)]"
             variants={itemVariants(prefersReducedMotion)}
           >
-            Let&apos;s build what grows next.
+            Let&apos;s Build Something Great Together
           </motion.h2>
 
           <motion.p
-            className="mt-5 max-w-xl text-body-lg text-pretty text-primary-band-foreground/75"
+            className="mt-5 max-w-xl text-body-lg text-pretty text-text-secondary"
             variants={itemVariants(prefersReducedMotion)}
           >
-            Share your goals. We&apos;ll map branding, product, and growth into
-            a clear plan — then move with precision.
+            We don&apos;t just market brands. We build businesses that grow.
           </motion.p>
 
           <motion.div
-            className="mt-9 w-full sm:mt-10 sm:w-auto"
+            className="mt-10 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center"
             variants={itemVariants(prefersReducedMotion)}
           >
             <Button
@@ -107,19 +100,18 @@ export function ContactCta({ className }: ContactCtaProps) {
               size="lg"
               variant="accent"
               className={cn(
-                "h-12 w-full min-w-52 px-8 text-base shadow-md sm:w-auto",
+                "h-12 min-w-52 px-8 text-base shadow-md",
                 "transition-[transform,box-shadow] duration-[var(--uds-duration-normal)] ease-[var(--uds-ease-standard)]",
                 "hover:-translate-y-0.5 hover:shadow-lg",
               )}
             >
               <Link href={ROUTES.contact}>
-                Book a consultation
-                <ArrowRightIcon
-                  data-icon="inline-end"
-                  className="transition-transform duration-[var(--uds-duration-fast)] group-hover/button:translate-x-0.5"
-                  aria-hidden
-                />
+                Book a Free Consultation
+                <ArrowRightIcon data-icon="inline-end" aria-hidden />
               </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="min-w-44">
+              <Link href={ROUTES.services.root}>Our Services</Link>
             </Button>
           </motion.div>
         </motion.div>
