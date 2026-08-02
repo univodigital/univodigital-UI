@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 
-import { BRAND, SITE, SITE_METADATA } from "@/constants/site";
+import { SITE, SITE_METADATA } from "@/constants/site";
 import { AppProviders } from "@/providers";
 
 import "@/styles/globals.css";
@@ -29,8 +29,12 @@ export const metadata: Metadata = {
   description: SITE_METADATA.description,
   metadataBase: new URL(SITE.url),
   icons: {
-    icon: BRAND.icon,
-    apple: BRAND.icon,
+    icon: [
+      { url: "/brand/icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/icon.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/brand/icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/brand/icon.png",
   },
   openGraph: {
     title: SITE.name,

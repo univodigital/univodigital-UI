@@ -12,7 +12,7 @@ export type ContactSubject =
 export type ContactRequestPayload = {
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
   company?: string;
   subject: ContactSubject;
   message: string;

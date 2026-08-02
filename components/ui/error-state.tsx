@@ -5,6 +5,10 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { AlertTriangleIcon, RefreshCwIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import {
+  cardDescriptionClassName,
+  cardTitleClassName,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const errorStateVariants = cva(
@@ -16,7 +20,7 @@ const errorStateVariants = cva(
         subtle: "bg-transparent",
         card: "rounded-card border border-danger/25 bg-card shadow-sm",
         banner:
-          "flex-row items-start gap-3 rounded-lg border border-danger/20 bg-danger/5 p-4 text-left",
+          "flex-row items-start gap-3 rounded-lg border border-danger/30 bg-danger/10 p-4 text-left",
       },
       size: {
         sm: "gap-2 px-4 py-6",
@@ -39,6 +43,8 @@ type ErrorStateProps = React.ComponentProps<"div"> &
     error?: Error | string | null;
     retryLabel?: string;
     onRetry?: () => void;
+    /** Use on light card surfaces inside forced-dark pages. */
+    tone?: "page" | "card";
   };
 
 function ErrorState({
@@ -51,6 +57,7 @@ function ErrorState({
   error,
   retryLabel = "Try again",
   onRetry,
+  tone = "page",
   children,
   ...props
 }: ErrorStateProps) {
@@ -62,6 +69,13 @@ function ErrorState({
     "Please try again. If the problem continues, contact support.";
 
   const isBanner = variant === "banner";
+  const usesCardTone = tone === "card" || variant === "card" || isBanner;
+  const titleClassName = usesCardTone
+    ? cn("text-base font-semibold", cardTitleClassName)
+    : "text-base font-semibold text-text-primary";
+  const messageClassName = usesCardTone
+    ? cn("text-sm", cardDescriptionClassName)
+    : "text-sm text-text-secondary";
 
   return (
     <div
@@ -92,8 +106,8 @@ function ErrorState({
         )}
       </div>
       <div className={cn("flex flex-col gap-1", isBanner && "min-w-0 flex-1")}>
-        <h3 className="text-base font-semibold text-text-primary">{title}</h3>
-        <p className="text-sm text-text-secondary">{message}</p>
+        <h3 className={titleClassName}>{title}</h3>
+        <p className={messageClassName}>{message}</p>
         {children}
       </div>
       {onRetry ? (
@@ -101,7 +115,11 @@ function ErrorState({
           variant="outline"
           size="sm"
           onClick={onRetry}
-          className={isBanner ? "shrink-0" : undefined}
+          className={cn(
+            isBanner && "shrink-0",
+            usesCardTone &&
+              "border-border bg-card text-card-foreground hover:bg-muted/60",
+          )}
         >
           <RefreshCwIcon />
           {retryLabel}
