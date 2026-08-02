@@ -385,6 +385,7 @@ export function ContactForm({
               {status === "error" && error ? (
                 <ErrorState
                   variant="banner"
+                  tone="card"
                   title="We couldn't send your message"
                   error={error}
                   onRetry={() => form.handleSubmit(onSubmit)()}

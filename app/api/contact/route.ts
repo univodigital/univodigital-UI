@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 
+import {
+  getEmailSendErrorMessage,
+  isEmailNotConfiguredError,
+} from "@/lib/email/errors";
+import { sendContactEmails } from "@/lib/email/send-contact-emails";
 import { contactFormSchema } from "@/schemas/contact";
 
 export async function POST(request: Request) {
@@ -17,7 +22,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Ready for CRM / email integration — payload is validated.
+    await sendContactEmails(parsed.data);
+
     return NextResponse.json(
       {
         success: true,
@@ -30,9 +36,24 @@ export async function POST(request: Request) {
       },
       { status: 201 },
     );
-  } catch {
+  } catch (error) {
+    console.error("[contact] submission failed:", error);
+
+    if (isEmailNotConfiguredError(error)) {
+      return NextResponse.json(
+        {
+          message: error.message,
+          code: error.code,
+        },
+        { status: 503 },
+      );
+    }
+
     return NextResponse.json(
-      { message: "Unable to process your request. Please try again." },
+      {
+        message: getEmailSendErrorMessage(error),
+        code: "EMAIL_SEND_FAILED",
+      },
       { status: 500 },
     );
   }
