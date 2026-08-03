@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2Icon, SendIcon } from "lucide-react";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { Container } from "@/components/layout/container";
@@ -25,10 +25,7 @@ import { CONTACT_SUBJECT_OPTIONS } from "@/data/contact";
 import { useAsyncState } from "@/hooks/use-async-state";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { duration, easing } from "@/lib/design-system/motion";
-import {
-  contactFormSchema,
-  type ContactFormValues,
-} from "@/schemas/contact";
+import { contactFormSchema, type ContactFormValues } from "@/schemas/contact";
 import type { ContactSubject } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -46,32 +43,102 @@ function RequiredMark() {
   );
 }
 
-type ContactApiResponse = {
-  success: boolean;
-  message: string;
-};
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mlgqqlbg";
 
-async function submitContactForm(
-  values: ContactFormValues,
-): Promise<ContactApiResponse> {
-  const response = await fetch("/api/contact", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      ...values,
-      company: values.company || undefined,
-    }),
-  });
+const CONTACT_FORM_ERROR_MESSAGE =
+  "Something went wrong. Please try again or email us directly.";
 
-  const data = (await response.json()) as ContactApiResponse & {
-    message?: string;
-  };
+const CONTACT_FORM_SUCCESS_MESSAGE =
+  "Thank you! Your enquiry has been received. We'll get back to you within 24 hours.";
 
-  if (!response.ok) {
-    throw new Error(data.message || "Unable to send your message.");
+function buildFormspreeFormData(values: ContactFormValues): FormData {
+  const formData = new FormData();
+  formData.append("Full Name", values.name);
+  formData.append("Email", values.email);
+  formData.append("Phone", values.phone);
+
+  if (values.company) {
+    formData.append("Company Name", values.company);
   }
 
-  return data;
+  const serviceLabel =
+    CONTACT_SUBJECT_OPTIONS.find((option) => option.value === values.subject)
+      ?.label ?? values.subject;
+
+  formData.append("Service", serviceLabel);
+  formData.append("Message", values.message);
+
+  return formData;
+}
+
+async function submitContactForm(values: ContactFormValues): Promise<void> {
+  try {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      body: buildFormspreeFormData(values),
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    const data = (await response.json()) as { ok?: boolean };
+
+    if (!response.ok || !data.ok) {
+      throw new Error(CONTACT_FORM_ERROR_MESSAGE);
+    }
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message === CONTACT_FORM_ERROR_MESSAGE
+    ) {
+      throw error;
+    }
+
+    throw new Error(CONTACT_FORM_ERROR_MESSAGE);
+  }
+}
+
+type ContactFormSuccessToastProps = {
+  message: string;
+  onDismiss: () => void;
+};
+
+function ContactFormSuccessToast({
+  message,
+  onDismiss,
+}: ContactFormSuccessToastProps) {
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const timer = window.setTimeout(onDismiss, 6000);
+    return () => window.clearTimeout(timer);
+  }, [onDismiss]);
+
+  return (
+    <motion.div
+      initial={
+        prefersReducedMotion ? false : { opacity: 0, y: 16, scale: 0.96 }
+      }
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={
+        prefersReducedMotion ? undefined : { opacity: 0, y: 8, scale: 0.98 }
+      }
+      transition={{
+        duration: prefersReducedMotion ? 0 : duration.normal,
+        ease: easing.emphasized,
+      }}
+      className="border-accent/30 bg-card ring-accent/20 fixed bottom-6 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 items-start gap-3 rounded-xl border p-4 shadow-lg ring-1 sm:bottom-8"
+      role="status"
+      aria-live="polite"
+    >
+      <span className="bg-accent/10 text-accent inline-flex size-9 shrink-0 items-center justify-center rounded-full">
+        <CheckCircle2Icon className="size-5" aria-hidden />
+      </span>
+      <p className="text-card-foreground pt-1 text-left text-sm leading-relaxed">
+        {message}
+      </p>
+    </motion.div>
+  );
 }
 
 export function ContactForm({
@@ -79,8 +146,12 @@ export function ContactForm({
   selectedSubject = "general",
 }: ContactFormProps) {
   const prefersReducedMotion = useReducedMotion();
-  const { status, error, isLoading, run, reset } =
-    useAsyncState<ContactApiResponse>();
+  const { status, isLoading, run, reset } = useAsyncState<void>();
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+
+  const dismissSuccessToast = useCallback(() => {
+    setShowSuccessToast(false);
+  }, []);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -99,7 +170,22 @@ export function ContactForm({
   }, [form, selectedSubject]);
 
   async function onSubmit(values: ContactFormValues) {
-    await run(submitContactForm(values));
+    if (isLoading) return;
+
+    const result = await run(submitContactForm(values));
+
+    if (result === null) return;
+
+    form.reset({
+      name: "",
+      email: "",
+      company: "",
+      phone: "",
+      subject: selectedSubject,
+      message: "",
+    });
+    reset();
+    setShowSuccessToast(true);
   }
 
   const fieldError = (name: keyof ContactFormValues) =>
@@ -111,7 +197,7 @@ export function ContactForm({
       spacing="lg"
       tone="default"
       aria-labelledby="contact-form-heading"
-      className={cn("relative overflow-hidden scroll-mt-24", className)}
+      className={cn("relative scroll-mt-24 overflow-hidden", className)}
     >
       <div
         aria-hidden
@@ -125,7 +211,7 @@ export function ContactForm({
       <Container size="max">
         <div className="mx-auto max-w-2xl text-center">
           <motion.p
-            className="text-caption font-medium tracking-wide text-accent uppercase"
+            className="text-caption text-accent font-medium tracking-wide uppercase"
             initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
@@ -139,7 +225,7 @@ export function ContactForm({
 
           <motion.h2
             id="contact-form-heading"
-            className="font-heading mt-3 text-h2 text-balance text-text-primary"
+            className="font-heading text-h2 text-text-primary mt-3 text-balance"
             initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -153,7 +239,7 @@ export function ContactForm({
           </motion.h2>
 
           <motion.p
-            className="mt-4 text-body-lg text-pretty text-text-secondary"
+            className="text-body-lg text-text-secondary mt-4 text-pretty"
             initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -181,236 +267,212 @@ export function ContactForm({
             ease: easing.emphasized,
           }}
         >
-          {status === "success" ? (
-            <div
-              className="flex flex-col items-center px-4 py-10 text-center"
-              role="status"
-              aria-live="polite"
-            >
-              <span className="inline-flex size-14 items-center justify-center rounded-full bg-accent/10 text-accent">
-                <CheckCircle2Icon className="size-7" aria-hidden />
-              </span>
-              <h3 className="font-heading mt-6 text-2xl font-semibold tracking-tight text-card-foreground">
-                Message sent successfully
-              </h3>
-              <p className="mt-3 max-w-md text-body text-card-muted-foreground">
-                Thank you for reaching out. Our team will review your brief and
-                get back to you within one business day.
-              </p>
-              <Button
-                type="button"
-                variant="outline"
-                className="mt-8"
-                onClick={() => {
-                  reset();
-                  form.reset({
-                    name: "",
-                    email: "",
-                    company: "",
-                    phone: "",
-                    subject: selectedSubject,
-                    message: "",
-                  });
-                }}
-              >
-                Send another message
-              </Button>
-            </div>
-          ) : (
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              noValidate
-              className="grid gap-6"
-            >
-              <div className="grid gap-6 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="contact-name">
-                    Full Name
-                    <RequiredMark />
-                  </Label>
-                  <Input
-                    id="contact-name"
-                    autoComplete="name"
-                    required
-                    aria-required="true"
-                    aria-invalid={Boolean(fieldError("name"))}
-                    aria-describedby={
-                      fieldError("name") ? "contact-name-error" : undefined
-                    }
-                    {...form.register("name")}
-                  />
-                  {fieldError("name") ? (
-                    <p
-                      id="contact-name-error"
-                      className="text-sm text-danger"
-                      role="alert"
-                    >
-                      {fieldError("name")}
-                    </p>
-                  ) : null}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="contact-email">
-                    Email Address
-                    <RequiredMark />
-                  </Label>
-                  <Input
-                    id="contact-email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    aria-required="true"
-                    aria-invalid={Boolean(fieldError("email"))}
-                    aria-describedby={
-                      fieldError("email") ? "contact-email-error" : undefined
-                    }
-                    {...form.register("email")}
-                  />
-                  {fieldError("email") ? (
-                    <p
-                      id="contact-email-error"
-                      className="text-sm text-danger"
-                      role="alert"
-                    >
-                      {fieldError("email")}
-                    </p>
-                  ) : null}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="contact-company">Company Name</Label>
-                  <Input
-                    id="contact-company"
-                    autoComplete="organization"
-                    aria-invalid={Boolean(fieldError("company"))}
-                    {...form.register("company")}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="contact-phone">
-                    Phone Number
-                    <RequiredMark />
-                  </Label>
-                  <Input
-                    id="contact-phone"
-                    type="tel"
-                    autoComplete="tel"
-                    required
-                    aria-required="true"
-                    aria-invalid={Boolean(fieldError("phone"))}
-                    aria-describedby={
-                      fieldError("phone") ? "contact-phone-error" : undefined
-                    }
-                    {...form.register("phone")}
-                  />
-                  {fieldError("phone") ? (
-                    <p
-                      id="contact-phone-error"
-                      className="text-sm text-danger"
-                      role="alert"
-                    >
-                      {fieldError("phone")}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            noValidate
+            className="grid gap-6"
+          >
+            <div className="grid gap-6 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="contact-subject">
-                  Service Required
+                <Label htmlFor="contact-name">
+                  Full Name
                   <RequiredMark />
                 </Label>
-                <Controller
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <Select
-                      value={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      <SelectTrigger
-                        id="contact-subject"
-                        fullWidth
-                        aria-invalid={Boolean(fieldError("subject"))}
-                      >
-                        <SelectValue placeholder="Select a service" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {CONTACT_SUBJECT_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-                {fieldError("subject") ? (
-                  <p className="text-sm text-danger" role="alert">
-                    {fieldError("subject")}
-                  </p>
-                ) : null}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="contact-message">
-                  Message
-                  <RequiredMark />
-                </Label>
-                <Textarea
-                  id="contact-message"
-                  textareaSize="lg"
+                <Input
+                  id="contact-name"
+                  autoComplete="name"
                   required
                   aria-required="true"
-                  placeholder="Tell us about your goals, timeline, and what success looks like for you."
-                  aria-invalid={Boolean(fieldError("message"))}
+                  aria-invalid={Boolean(fieldError("name"))}
                   aria-describedby={
-                    fieldError("message") ? "contact-message-error" : undefined
+                    fieldError("name") ? "contact-name-error" : undefined
                   }
-                  {...form.register("message")}
+                  {...form.register("name")}
                 />
-                {fieldError("message") ? (
+                {fieldError("name") ? (
                   <p
-                    id="contact-message-error"
-                    className="text-sm text-danger"
+                    id="contact-name-error"
+                    className="text-danger text-sm"
                     role="alert"
                   >
-                    {fieldError("message")}
+                    {fieldError("name")}
                   </p>
                 ) : null}
               </div>
 
-              {status === "error" && error ? (
-                <ErrorState
-                  variant="banner"
-                  tone="card"
-                  title="We couldn't send your message"
-                  error={error}
-                  onRetry={() => form.handleSubmit(onSubmit)()}
+              <div className="space-y-2">
+                <Label htmlFor="contact-email">
+                  Email Address
+                  <RequiredMark />
+                </Label>
+                <Input
+                  id="contact-email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  aria-required="true"
+                  aria-invalid={Boolean(fieldError("email"))}
+                  aria-describedby={
+                    fieldError("email") ? "contact-email-error" : undefined
+                  }
+                  {...form.register("email")}
                 />
-              ) : null}
-
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm text-card-muted-foreground">
-                  By submitting, you agree to be contacted about your inquiry.
-                </p>
-                <Button
-                  type="submit"
-                  size="lg"
-                  variant="accent"
-                  loading={isLoading}
-                  className="min-w-40 shrink-0"
-                >
-                  Let&apos;s Talk
-                  <SendIcon data-icon="inline-end" aria-hidden />
-                </Button>
+                {fieldError("email") ? (
+                  <p
+                    id="contact-email-error"
+                    className="text-danger text-sm"
+                    role="alert"
+                  >
+                    {fieldError("email")}
+                  </p>
+                ) : null}
               </div>
-            </form>
-          )}
+
+              <div className="space-y-2">
+                <Label htmlFor="contact-company">Company Name</Label>
+                <Input
+                  id="contact-company"
+                  autoComplete="organization"
+                  aria-invalid={Boolean(fieldError("company"))}
+                  {...form.register("company")}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="contact-phone">
+                  Phone Number
+                  <RequiredMark />
+                </Label>
+                <Input
+                  id="contact-phone"
+                  type="tel"
+                  autoComplete="tel"
+                  required
+                  aria-required="true"
+                  aria-invalid={Boolean(fieldError("phone"))}
+                  aria-describedby={
+                    fieldError("phone") ? "contact-phone-error" : undefined
+                  }
+                  {...form.register("phone")}
+                />
+                {fieldError("phone") ? (
+                  <p
+                    id="contact-phone-error"
+                    className="text-danger text-sm"
+                    role="alert"
+                  >
+                    {fieldError("phone")}
+                  </p>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="contact-subject">
+                Service Required
+                <RequiredMark />
+              </Label>
+              <Controller
+                control={form.control}
+                name="subject"
+                render={({ field }) => (
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger
+                      id="contact-subject"
+                      fullWidth
+                      aria-invalid={Boolean(fieldError("subject"))}
+                    >
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CONTACT_SUBJECT_OPTIONS.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              {fieldError("subject") ? (
+                <p className="text-danger text-sm" role="alert">
+                  {fieldError("subject")}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="contact-message">
+                Message
+                <RequiredMark />
+              </Label>
+              <Textarea
+                id="contact-message"
+                textareaSize="lg"
+                required
+                aria-required="true"
+                placeholder="Tell us about your goals, timeline, and what success looks like for you."
+                aria-invalid={Boolean(fieldError("message"))}
+                aria-describedby={
+                  fieldError("message") ? "contact-message-error" : undefined
+                }
+                {...form.register("message")}
+              />
+              {fieldError("message") ? (
+                <p
+                  id="contact-message-error"
+                  className="text-danger text-sm"
+                  role="alert"
+                >
+                  {fieldError("message")}
+                </p>
+              ) : null}
+            </div>
+
+            {status === "error" ? (
+              <ErrorState
+                variant="banner"
+                tone="card"
+                title="We couldn't send your message"
+                description={CONTACT_FORM_ERROR_MESSAGE}
+                onRetry={() => form.handleSubmit(onSubmit)()}
+              />
+            ) : null}
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-card-muted-foreground text-sm">
+                By submitting, you agree to be contacted about your inquiry.
+              </p>
+              <Button
+                type="submit"
+                size="lg"
+                variant="accent"
+                loading={isLoading}
+                disabled={isLoading}
+                className="min-w-40 shrink-0"
+              >
+                {isLoading ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    Let&apos;s Talk
+                    <SendIcon data-icon="inline-end" aria-hidden />
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
         </motion.div>
       </Container>
+
+      <AnimatePresence>
+        {showSuccessToast ? (
+          <ContactFormSuccessToast
+            message={CONTACT_FORM_SUCCESS_MESSAGE}
+            onDismiss={dismissSuccessToast}
+          />
+        ) : null}
+      </AnimatePresence>
     </Section>
   );
 }
